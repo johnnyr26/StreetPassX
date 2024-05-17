@@ -1,36 +1,64 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
 import "./App.css";
 
+import Box from '@mui/material/Box';
+import Typography from "@mui/material/Typography";
+
+import NavBar from "./components/Navbar";
 import Button from "./elements/Button";
+import Card from "./elements/Card";
+
+const Pass = ({ name, passes }: { name: string, passes: string[] }) => {
+  return (
+    <Card
+      sx={{
+        height: "150px",
+        width: "225px",
+        padding: "10px",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
+      <Typography variant="h5" component="div">
+        {name}
+      </Typography>
+      <Box>
+        {passes.map((pass) => (
+          <Typography variant="body1" component="div" key={pass}>
+            {pass}
+          </Typography>
+        ))}
+      </Box>
+
+      <Button sx={{height: '42px', fontSize: '18px'}}>Claim Pass</Button>
+    </Card>
+  );
+}
 
 const App = () => {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <Button>Hello World</Button>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <NavBar />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-around",
+        }}
+      >
+        <Pass
+          name="Jalen Jones"
+          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+        />
+        <Pass
+          name="Jalen Jones"
+          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+        />
+        <Pass
+          name="Jalen Jones"
+          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+        />
+      </Box>
     </>
   );
 };

@@ -1,9 +1,11 @@
 import MuiCard, { CardProps } from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
 import { styled } from "@mui/material/styles";
 
 const StyledCard = styled(MuiCard)<CardProps>(() => ({
-  backgroundColor: "white",
+    backgroundColor: "white",
+    width: 'max-content',
+    textAlign: 'left',
+    borderRadius: 10
 }));
 
 type Props = {
@@ -12,8 +14,8 @@ type Props = {
 
 const Card = ({ children, ...props }: Props) => {
   return (
-    <StyledCard {...props}>
-      <CardContent>{children}</CardContent>
+      <StyledCard {...props}>
+          {children}
     </StyledCard>
   );
 };

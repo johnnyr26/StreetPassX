@@ -1,5 +1,7 @@
 import { createTheme } from "@mui/material";
 
+import '@fontsource/inter'; // Ensure font is loaded
+
 declare module '@mui/material/styles' {
   interface Theme {
     status: {
@@ -19,6 +21,11 @@ declare module '@mui/material/styles' {
 export const theme = createTheme({
     components: {
         MuiButton: {
+            styleOverrides: {
+                root: {
+                textTransform: 'none',
+                },
+            },
             defaultProps: {
                 disableRipple: true,
             },
@@ -34,5 +41,8 @@ export const theme = createTheme({
         secondary: {
             main: '#bfb182'
         }
-    }
+    },
+    typography: {
+        fontFamily: 'Inter',
+    },
 });
