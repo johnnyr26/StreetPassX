@@ -1,39 +1,10 @@
 import "./App.css";
 
-import Box from '@mui/material/Box';
-import Typography from "@mui/material/Typography";
+import Box from "@mui/material/Box";
 
+import Pass from "./components/Pass";
 import NavBar from "./components/Navbar";
-import Button from "./elements/Button";
-import Card from "./elements/Card";
-
-const Pass = ({ name, passes }: { name: string, passes: string[] }) => {
-  return (
-    <Card
-      sx={{
-        height: "150px",
-        width: "225px",
-        padding: "10px",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
-      <Typography variant="h5" component="div">
-        {name}
-      </Typography>
-      <Box>
-        {passes.map((pass) => (
-          <Typography variant="body1" component="div" key={pass}>
-            {pass}
-          </Typography>
-        ))}
-      </Box>
-
-      <Button sx={{height: '42px', fontSize: '18px'}}>Claim Pass</Button>
-    </Card>
-  );
-}
+import Sidebar from "./components/Sidebar";
 
 const App = () => {
   return (
@@ -43,21 +14,45 @@ const App = () => {
         sx={{
           display: "flex",
           flexDirection: "row",
-          justifyContent: "space-around",
         }}
       >
-        <Pass
-          name="Jalen Jones"
-          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
-        />
-        <Pass
-          name="Jalen Jones"
-          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
-        />
-        <Pass
-          name="Jalen Jones"
-          passes={["1x Sunday Funday", "3x Saturday Night Out"]}
-        />
+        <Sidebar />
+        {/* Allows the cards to wrap without being stretched */}
+        <Box>
+          <Box
+            sx={{
+              paddingTop: "30px",
+              display: "flex",
+              justifyContent: "center",
+              flexFlow: "row wrap",
+            }}
+          >
+            <Pass
+              name="Jalen Jones"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+            <Pass
+              name="Nate Drogin"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+            <Pass
+              name="Walker Dubrueil"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+            <Pass
+              name="Christopher Florance"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+            <Pass
+              name="Hugh Markham"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+            <Pass
+              name="Jack Feise"
+              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+            />
+          </Box>
+        </Box>
       </Box>
     </>
   );
