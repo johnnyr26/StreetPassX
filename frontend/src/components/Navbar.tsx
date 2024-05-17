@@ -5,19 +5,27 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 
 const NavBar = () => {
-    return (
-      <Box sx={{ flexGrow: 1, width: '100%' }}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
-              StreetPassX
+  return (
+    <Box sx={{ width: "100%", position: "sticky", top: 0 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
+            StreetPassX
+          </Typography>
+          <Button color="inherit">
+            <Typography variant="body1" component="div">
+              My Passes
             </Typography>
-            <Button color="inherit">My Passes</Button>
-            <Button color="inherit">Trade Passes</Button>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    );
+          </Button>
+          <Button color="inherit">
+            <Typography variant="body1" component="div">
+              Trade Passes
+            </Typography>
+          </Button>
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 };
 
 export default NavBar;
