@@ -1,15 +1,32 @@
+import { useEffect, useState } from "react";
+
 import { Box } from "@mui/material";
 import Typography from "@mui/material/Typography";
 
 import MyPass from "./MyPass";
 
 const Sidebar = () => {
+  const [windowHeight, setWindowHeight] = useState(
+    `${window.innerHeight - 64}px`
+  );
+
+  useEffect(() => {
+    const handleWindowResize = () => {
+      console.log(`${window.innerHeight - 64}px`);
+      setWindowHeight(`${window.innerHeight - 64}px`);
+    };
+
+    window.addEventListener("resize", handleWindowResize);
+    return () => window.removeEventListener("resize", handleWindowResize);
+  }, []);
+
   return (
     <Box
       sx={{
         flex: 1,
+        boxSizing: "border-box !important",
+        height: `${windowHeight}`,
         backgroundColor: "#d9d9d9",
-        height: "100vh",
         minWidth: "350px",
         padding: "12px 24px",
         overflow: "scroll",
@@ -30,45 +47,39 @@ const Sidebar = () => {
         onList={false}
       />
       <MyPass
-        event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
+        event="Saturday Night Out"
+        from="Walker Dubreuil"
+        guest="Charlie Palmer"
         onList={true}
       />
       <MyPass
         event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
+        from="James Cross"
+        guest="James McGibbons"
+        onList={false}
+      />
+      <MyPass
+        event="Sunday Funday"
+        from="Charlotte Myers"
+        guest="Sofia Michaelides"
+        onList={false}
+      />
+      <MyPass
+        event="Sunday Funday"
+        from="Liv Bobby"
+        guest="Samantha Handwerk"
         onList={true}
       />
       <MyPass
         event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
-        onList={true}
+        from="Charlotte Myers"
+        guest="Sofia Michaelides"
+        onList={false}
       />
       <MyPass
         event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
-        onList={true}
-      />
-      <MyPass
-        event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
-        onList={true}
-      />
-      <MyPass
-        event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
-        onList={true}
-      />
-      <MyPass
-        event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
+        from="Liv Bobby"
+        guest="Samantha Handwerk"
         onList={true}
       />
     </Box>

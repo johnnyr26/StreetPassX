@@ -8,10 +8,15 @@ import Sidebar from "./components/Sidebar";
 
 const App = () => {
   return (
-    <>
+    <Box sx={{
+      height: '100%',
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
       <NavBar />
       <Box
         sx={{
+          flex: 1,
           display: "flex",
           flexDirection: "row",
         }}
@@ -54,7 +59,7 @@ const App = () => {
           </Box>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 };
 
