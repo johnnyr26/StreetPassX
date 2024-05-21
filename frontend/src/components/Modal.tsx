@@ -31,11 +31,11 @@ const Modal = ({
   ];
 }) => {
   const [open, setOpen] = modalOpenStates;
-    const handleClose = () => {
-        setTradeAwayChecked(false);
-        setTradeForChecked(false);
-        setOpen(false);
-    }
+  const handleClose = () => {
+    setTradeAwayChecked(false);
+    setTradeForChecked(false);
+    setOpen(false);
+  };
 
   const [tradeAwayChecked, setTradeAwayChecked] = useState(false);
   const [tradeForChecked, setTradeForChecked] = useState(false);
@@ -43,8 +43,6 @@ const Modal = ({
   return (
     <MuiModal open={open} onClose={handleClose}>
       <Box sx={style}>
-        {/* <TextField fullWidth id="outlined-basic" label="Outlined" variant="outlined" /> */}
-        {/* <TextField id="filled-basic" label="Filled" variant="filled" /> */}
         <Typography variant="h6" component="h2">
           Add New Event
         </Typography>
@@ -65,7 +63,7 @@ const Modal = ({
             <FormControlLabel
               control={
                 <Checkbox
-                  onChange={() => setTradeAwayChecked(prev => !prev)}
+                  onChange={() => setTradeAwayChecked((prev) => !prev)}
                 />
               }
               label="Specific Date?"
@@ -91,7 +89,7 @@ const Modal = ({
             <FormControlLabel
               control={
                 <Checkbox
-                  onChange={() => setTradeForChecked(prev => !prev)}
+                  onChange={() => setTradeForChecked((prev) => !prev)}
                 />
               }
               label="Specific Date?"
