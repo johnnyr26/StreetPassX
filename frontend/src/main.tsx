@@ -1,29 +1,33 @@
-import './index.css'
+import "./index.css";
 
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import App from './App.tsx'
-import Lineup from './pages/Lineup.tsx';
+import App from "./App.tsx";
+import Lineup from "./pages/Lineup.tsx";
 
-import { theme } from '../style/theme.ts'
-import { ThemeProvider } from '@mui/material'
+import { theme } from "../style/theme.ts";
+import { ThemeProvider } from "@mui/material";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />
+    element: <App />,
   },
   {
     path: "/lineup",
-    element: <Lineup />
-  }
+    element: <Lineup />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <RouterProvider router={router} />
+      <LocalizationProvider dateAdapter={AdapterDayjs}>
+        <RouterProvider router={router} />
+      </LocalizationProvider>
     </ThemeProvider>
   </React.StrictMode>
 );
