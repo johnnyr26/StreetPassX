@@ -23,8 +23,8 @@ const AddNewEvent = ({
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        height: "150px",
-        width: "225px",
+        height: "170px",
+        width: "245px",
         padding: "10px",
         margin: "10px",
       }}
