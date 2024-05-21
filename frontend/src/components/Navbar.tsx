@@ -1,8 +1,6 @@
 import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
+
+import { Box, Link, Toolbar, Typography } from "@mui/material";
 
 const NavBar = () => {
   return (
@@ -12,16 +10,24 @@ const NavBar = () => {
           <Typography variant="h5" component="div" sx={{ flexGrow: 1 }}>
             StreetPassX
           </Typography>
-          <Button color="inherit">
-            <Typography variant="body1" component="div">
+          <Link
+            href="/"
+            color="inherit"
+            sx={{ textDecoration: "none", ml: "36px" }}
+          >
+            <Typography variant="h6" component="div">
               My Passes
             </Typography>
-          </Button>
-          <Button color="inherit">
-            <Typography variant="body1" component="div">
+          </Link>
+          <Link
+            href="/lineup"
+            color="inherit"
+            sx={{ textDecoration: "none", ml: "36px" }}
+          >
+            <Typography variant="h6" component="div">
               Trade Passes
             </Typography>
-          </Button>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
