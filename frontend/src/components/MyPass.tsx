@@ -1,7 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Button from "../elements/Button";
 import Card from "../elements/Card";
 
 type Props = {
