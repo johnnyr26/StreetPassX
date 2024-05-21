@@ -6,13 +6,17 @@ import Typography from "@mui/material/Typography";
 import MyPass from "./MyPass";
 
 const Sidebar = () => {
+  /* State variables */
   const [windowHeight, setWindowHeight] = useState(
     `${window.innerHeight - 64}px`
   );
 
   useEffect(() => {
+    /* 
+      Adjust height of sidebar for window resizing to
+      avoid weird extra space that causes scroll.
+    */
     const handleWindowResize = () => {
-      console.log(`${window.innerHeight - 64}px`);
       setWindowHeight(`${window.innerHeight - 64}px`);
     };
 
