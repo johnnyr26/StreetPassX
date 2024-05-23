@@ -2,12 +2,12 @@ import { useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { EditPass } from "../components/Pass";
+import {ClaimPass} from "../components/Pass";
 import NavBar from "../components/Navbar";
 import Modal from "../components/Modal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
-const Lineup = () => {
+const Floor = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ const Lineup = () => {
             variant="h2"
             sx={{ paddingTop: "30px", textAlign: "center" }}
           >
-            My Lineup
+            Trading Floor
           </Typography>
           <Box
             sx={{
@@ -44,27 +44,27 @@ const Lineup = () => {
           >
             <Modal modalOpenStates={[modalOpen, setModalOpen]} />
             <NewTradeRequest setModalOpen={setModalOpen} />
-            <EditPass
-              name="Jalen Jones"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+            <ClaimPass
+              name="1 Pass for Saturday, Sept 23"
+              descriptions={["For: Any Future Saturday Night Out", "Guest: Jalen Jones"]}
             />
-            <EditPass
+            <ClaimPass
               name="Nate Drogin"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <EditPass
+            <ClaimPass
               name="Walker Dubrueil"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <EditPass
+            <ClaimPass
               name="Christopher Florance"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <EditPass
+            <ClaimPass
               name="Hugh Markham"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <EditPass
+            <ClaimPass
               name="Jack Feise"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
@@ -75,4 +75,4 @@ const Lineup = () => {
   );
 };
 
-export default Lineup;
+export default Floor;

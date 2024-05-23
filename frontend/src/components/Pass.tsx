@@ -4,12 +4,22 @@ import Typography from "@mui/material/Typography";
 import Button from "../elements/Button";
 import Card from "../elements/Card";
 
-const Pass = ({ name, passes }: { name: string; passes: string[] }) => {
+const Pass = ({
+  name,
+  descriptions,
+  buttonTitle,
+  onPress,
+}: {
+  name: string;
+  descriptions: string[];
+  buttonTitle: string;
+  onPress: () => void;
+}) => {
   return (
     <Card
       sx={{
         height: "150px",
-        width: "225px",
+        minWidth: "225px",
         padding: "10px",
         margin: "10px",
         display: "flex",
@@ -21,15 +31,53 @@ const Pass = ({ name, passes }: { name: string; passes: string[] }) => {
         {name}
       </Typography>
       <Box>
-        {passes.map((pass) => (
-          <Typography variant="body1" component="div" key={pass}>
-            {pass}
+        {descriptions.map((description, index) => (
+          <Typography
+            variant="body1"
+            component="div"
+            key={`${description},${index}`}
+          >
+            {description}
           </Typography>
         ))}
       </Box>
-      <Button sx={{ height: "42px", fontSize: "18px" }}>Request Pass</Button>
+      <Button sx={{ height: "42px", fontSize: "18px" }} onPress={onPress}>
+        {buttonTitle}
+      </Button>
     </Card>
   );
 };
 
-export default Pass;
+export const ClaimPass = ({
+  name,
+  descriptions,
+}: {
+  name: string;
+  descriptions: string[];
+}) => {
+  return (
+    <Pass
+      name={name}
+      descriptions={descriptions}
+      buttonTitle={"Claim Pass"}
+      onPress={() => {}}
+    />
+  );
+};
+
+export const EditPass = ({
+  name,
+  descriptions,
+}: {
+  name: string;
+  descriptions: string[];
+}) => {
+  return (
+    <Pass
+      name={name}
+      descriptions={descriptions}
+      buttonTitle={"Edit Pass"}
+      onPress={() => {}}
+    />
+  );
+};

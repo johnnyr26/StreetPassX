@@ -20,12 +20,21 @@ const NavBar = () => {
             </Typography>
           </Link>
           <Link
+            href="/floor"
+            color="inherit"
+            sx={{ textDecoration: "none", ml: "36px" }}
+          >
+            <Typography variant="h6" component="div">
+              Trading Floor
+            </Typography>
+          </Link>
+          <Link
             href="/lineup"
             color="inherit"
             sx={{ textDecoration: "none", ml: "36px" }}
           >
             <Typography variant="h6" component="div">
-              Trade Passes
+              My Lineup
             </Typography>
           </Link>
         </Toolbar>

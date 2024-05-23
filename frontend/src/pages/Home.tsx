@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 
-import Pass from "../components/Pass";
+import { ClaimPass } from "../components/Pass";
 import NavBar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 
@@ -32,29 +32,29 @@ const Home = () => {
               flexFlow: "row wrap",
             }}
           >
-            <Pass
+            <ClaimPass
               name="Jalen Jones"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <Pass
+            <ClaimPass
               name="Nate Drogin"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <Pass
+            <ClaimPass
               name="Walker Dubrueil"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <Pass
+            <ClaimPass
               name="Christopher Florance"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <Pass
+            <ClaimPass
               name="Hugh Markham"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
-            <Pass
+            <ClaimPass
               name="Jack Feise"
-              passes={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
             />
           </Box>
         </Box>
