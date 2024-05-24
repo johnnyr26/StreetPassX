@@ -46,28 +46,40 @@ const Floor = () => {
             <NewTradeRequest setModalOpen={setModalOpen} />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
-              descriptions={["For: Any Future Saturday Night Out", "Guest: Jalen Jones"]}
+              descriptions={[
+                "For: Any Future Saturday Night Out",
+                "Guest: Jalen Jones",
+              ]}
             />
             <ClaimPass
-              name="Nate Drogin"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="1 Pass for Saturday, Sept 23"
+              descriptions={[
+                "For: Any Future Saturday Night Out",
+                "Guest: Jalen Jones",
+              ]}
             />
             <ClaimPass
-              name="Walker Dubrueil"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="1 Pass for Saturday, Sept 23"
+              descriptions={[
+                "For: Any Future Saturday Night Out",
+                "Guest: Jalen Jones",
+              ]}
             />
             <ClaimPass
-              name="Christopher Florance"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="1 Pass for Saturday, Sept 23"
+              descriptions={[
+                "For: Any Future Saturday Night Out",
+                "Guest: Jalen Jones",
+              ]}
             />
             <ClaimPass
-              name="Hugh Markham"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="1 Pass for Saturday, Sept 23"
+              descriptions={[
+                "For: Any Future Saturday Night Out",
+                "Guest: Jalen Jones",
+              ]}
             />
-            <ClaimPass
-              name="Jack Feise"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
-            />
+            
           </Box>
         </Box>
       </Box>
