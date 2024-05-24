@@ -62,31 +62,6 @@ const Modal = ({
             outline: "none !important",
           }}
         >
-          <TextField fullWidth label="Trading Away" variant="standard" />
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "center",
-              mt: "20px",
-            }}
-          >
-            <FormControlLabel
-              control={
-                <Checkbox
-                  onChange={() => setTradeAwayChecked((prev) => !prev)}
-                />
-              }
-              sx={{
-                mr: "5px",
-              }}
-              label="Specific Date?"
-            />
-            <Tooltip title="Setting a date will help with notifying users when to add members to the list.">
-              <HelpIcon color="primary" sx={{ mr: "15px" }} />
-            </Tooltip>
-            {tradeAwayChecked && <DatePicker />}
-          </Box>
           <TextField
             fullWidth
             label="Trading For"
@@ -114,16 +89,45 @@ const Modal = ({
               }}
               label="Specific Date?"
             />
-            <Tooltip title="Setting a date will help with notifying users when to add members to the list.">
+            <Tooltip title="Setting a date will help notify users when to add members to the list.">
               <HelpIcon color="primary" sx={{ mr: "15px" }} />
             </Tooltip>
             {tradeForChecked && <DatePicker />}
           </Box>
+          <TextField fullWidth label="Trading Away" variant="standard" />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+              mt: "20px",
+            }}
+          >
+            <FormControlLabel
+              control={
+                <Checkbox
+                  onChange={() => setTradeAwayChecked((prev) => !prev)}
+                />
+              }
+              sx={{
+                mr: "5px",
+              }}
+              label="Specific Date?"
+            />
+            <Tooltip title="Setting a date will help with notifying users when to add members to the list.">
+              <HelpIcon color="primary" sx={{ mr: "15px" }} />
+            </Tooltip>
+            {tradeAwayChecked && <DatePicker />}
+          </Box>
+          <TextField fullWidth label="Guest?" variant="standard" />{" "}
           <TextField
             fullWidth
             multiline
             label="Additional Note"
             variant="standard"
+            sx={{
+              mt: "36px",
+            }}
             inputProps={{
               style: {
                 maxHeight: "200px",
