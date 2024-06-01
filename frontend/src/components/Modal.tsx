@@ -66,51 +66,25 @@ export const ClaimPassModal = ({
   return (
     <Modal modalOpenStates={modalOpenStates} handleClose={handleClose}>
       <Typography
-        variant="h6"
-        component="h2"
+        variant="h4"
+        component="div"
         sx={{
+          textAlign: "center",
           mb: "10px",
         }}
       >
-        New Trade Request
+        Fulfill Exchange with Jalen Jones
       </Typography>
-
-      <Typography
-        variant="h6"
-        component="h6"
-        sx={{
-          color: '#a3a3a3'
-        }}
-      >
-        Select how many of each passes that you want to claim from Jalen Jones
+      <Typography variant="body1" component="div" sx={{ textAlign: "center" }}>
+        Do you want to confirm the fulfillment of the pass exchange with Jalen
+        Jones? Once this action is done, it cannot be undone.
       </Typography>
-      <FormGroup>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            mt: "20px",
-          }}
-        >
-          <NumberInput />
-          <Typography sx={{ ml: "10px" }}>Sunday Funday</Typography>
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            alignItems: "center",
-            mt: "20px",
-          }}
-        >
-          <NumberInput />
-          <Typography sx={{ ml: "10px" }}>Saturday Nights Out</Typography>
-        </Box>
-        <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
-          Submit
-        </Button>
-      </FormGroup>
+      <Typography variant="body1" component="div" sx={{ textAlign: "center", color: 'red', mt: '10px' }}>
+        Note that by fulfilling a pass exchange, you are confirming that you have added their guest to your list.
+      </Typography>
+      <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
+        Confirm
+      </Button>
     </Modal>
   );
 };

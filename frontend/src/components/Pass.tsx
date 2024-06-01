@@ -61,7 +61,7 @@ export const ClaimPass = ({
     <Pass
       name={name}
       descriptions={descriptions}
-      buttonTitle={"Claim Pass"}
+      buttonTitle={"Fulfill Pass Exchange"}
       onPress={modalOpen}
     />
   );

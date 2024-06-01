@@ -39,32 +39,37 @@ const Home = () => {
             <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
             <ClaimPass
               name="Jalen Jones"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
             <ClaimPass
-              name="Nate Drogin"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
             <ClaimPass
-              name="Walker Dubrueil"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
             <ClaimPass
-              name="Christopher Florance"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
             <ClaimPass
-              name="Hugh Markham"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
             <ClaimPass
-              name="Jack Feise"
-              descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
+              modalOpen={() => setOpenModal(true)}
+            />
+            <ClaimPass
+              name="Jalen Jones"
+              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
               modalOpen={() => setOpenModal(true)}
             />
           </Box>
