@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import {ClaimPass} from "../components/Pass";
+import { ClaimPass } from "../components/Pass";
 import NavBar from "../components/Navbar";
-import {TradeRequestModal} from "../components/Modal";
+import { TradeRequestModal } from "../components/Modal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Floor = () => {
@@ -84,7 +84,6 @@ const Floor = () => {
               ]}
               modalOpen={setModalOpen}
             />
-            
           </Box>
         </Box>
       </Box>
