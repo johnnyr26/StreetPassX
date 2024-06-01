@@ -41,7 +41,7 @@ const Pass = ({
           </Typography>
         ))}
       </Box>
-      <Button sx={{ height: "42px", fontSize: "18px" }} onPress={onPress}>
+      <Button sx={{ height: "42px", fontSize: "18px" }} onClick={onPress}>
         {buttonTitle}
       </Button>
     </Card>
@@ -51,16 +51,18 @@ const Pass = ({
 export const ClaimPass = ({
   name,
   descriptions,
+  modalOpen,
 }: {
   name: string;
   descriptions: string[];
+  modalOpen: () => void;
 }) => {
   return (
     <Pass
       name={name}
       descriptions={descriptions}
       buttonTitle={"Claim Pass"}
-      onPress={() => {}}
+      onPress={modalOpen}
     />
   );
 };
@@ -68,16 +70,18 @@ export const ClaimPass = ({
 export const EditPass = ({
   name,
   descriptions,
+  modalOpen,
 }: {
   name: string;
   descriptions: string[];
+  modalOpen: () => void;
 }) => {
   return (
     <Pass
-      name={name}
+      name={`Guest: ${name}`}
       descriptions={descriptions}
       buttonTitle={"Edit Pass"}
-      onPress={() => {}}
+      onPress={modalOpen}
     />
   );
 };

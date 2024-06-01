@@ -4,11 +4,12 @@ import { Box, Typography } from "@mui/material";
 
 import { EditPass } from "../components/Pass";
 import NavBar from "../components/Navbar";
-import Modal from "../components/Modal";
+import { ClaimPassModal, TradeRequestModal } from "../components/Modal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Lineup = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [claimPassModalOpen, setClaimPassModalOpen] = useState(false);
+  const [tradeRequestModalOpen, setTradeRequestModalOpen] = useState(false);
 
   return (
     <Box
@@ -42,31 +43,45 @@ const Lineup = () => {
               flexFlow: "row wrap",
             }}
           >
-            <Modal modalOpenStates={[modalOpen, setModalOpen]} />
-            <NewTradeRequest setModalOpen={setModalOpen} />
+            <TradeRequestModal
+              modalOpenStates={[
+                tradeRequestModalOpen,
+                setTradeRequestModalOpen,
+              ]}
+            />
+            <ClaimPassModal
+              modalOpenStates={[claimPassModalOpen, setClaimPassModalOpen]}
+            />
+            <NewTradeRequest setModalOpen={setTradeRequestModalOpen} />
             <EditPass
               name="Jalen Jones"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
             <EditPass
               name="Nate Drogin"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
             <EditPass
               name="Walker Dubrueil"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
             <EditPass
               name="Christopher Florance"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
             <EditPass
               name="Hugh Markham"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
             <EditPass
               name="Jack Feise"
               descriptions={["1x Sunday Funday", "3x Saturday Night Out"]}
+              modalOpen={() => setClaimPassModalOpen(true)}
             />
           </Box>
         </Box>
