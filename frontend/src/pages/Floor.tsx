@@ -4,7 +4,7 @@ import { Box, Typography } from "@mui/material";
 
 import {ClaimPass} from "../components/Pass";
 import NavBar from "../components/Navbar";
-import Modal from "../components/Modal";
+import {TradeRequestModal} from "../components/Modal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Floor = () => {
@@ -42,7 +42,7 @@ const Floor = () => {
               flexFlow: "row wrap",
             }}
           >
-            <Modal modalOpenStates={[modalOpen, setModalOpen]} />
+            <TradeRequestModal modalOpenStates={[modalOpen, setModalOpen]} />
             <NewTradeRequest setModalOpen={setModalOpen} />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
@@ -50,6 +50,7 @@ const Floor = () => {
                 "For: Any Future Saturday Night Out",
                 "Guest: Jalen Jones",
               ]}
+              modalOpen={setModalOpen}
             />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
@@ -57,6 +58,7 @@ const Floor = () => {
                 "For: Any Future Saturday Night Out",
                 "Guest: Jalen Jones",
               ]}
+              modalOpen={setModalOpen}
             />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
@@ -64,6 +66,7 @@ const Floor = () => {
                 "For: Any Future Saturday Night Out",
                 "Guest: Jalen Jones",
               ]}
+              modalOpen={setModalOpen}
             />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
@@ -71,6 +74,7 @@ const Floor = () => {
                 "For: Any Future Saturday Night Out",
                 "Guest: Jalen Jones",
               ]}
+              modalOpen={setModalOpen}
             />
             <ClaimPass
               name="1 Pass for Saturday, Sept 23"
@@ -78,6 +82,7 @@ const Floor = () => {
                 "For: Any Future Saturday Night Out",
                 "Guest: Jalen Jones",
               ]}
+              modalOpen={setModalOpen}
             />
             
           </Box>
