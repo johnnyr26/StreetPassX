@@ -11,21 +11,21 @@ const NavBar = () => {
             StreetPassX
           </Typography>
           <Link
-            href="/"
-            color="inherit"
-            sx={{ textDecoration: "none", ml: "36px" }}
-          >
-            <Typography variant="h6" component="div">
-              My Passes
-            </Typography>
-          </Link>
-          <Link
             href="/floor"
             color="inherit"
             sx={{ textDecoration: "none", ml: "36px" }}
           >
             <Typography variant="h6" component="div">
               Trading Floor
+            </Typography>
+          </Link>
+          <Link
+            href="/"
+            color="inherit"
+            sx={{ textDecoration: "none", ml: "36px" }}
+          >
+            <Typography variant="h6" component="div">
+              My Passes
             </Typography>
           </Link>
           <Link
