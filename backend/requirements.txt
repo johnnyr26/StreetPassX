@@ -1,0 +1,6 @@
+Flask
+pymongo[srv]
+Flask-PyMongo
+python-dotenv
+pydantic
+python-dateutil
