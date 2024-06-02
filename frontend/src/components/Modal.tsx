@@ -10,10 +10,9 @@ import {
   Typography,
 } from "@mui/material";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
-import Button from "../elements/Button";
-import NumberInput from "../elements/NumberInput";
-
 import HelpIcon from "@mui/icons-material/Help";
+
+import Button from "../elements/Button";
 
 const style = {
   position: "absolute",
@@ -73,7 +72,7 @@ export const ClaimPassModal = ({
           mb: "10px",
         }}
       >
-        Fulfill Exchange with Jalen Jones
+        Fulfill Exchange with Jalen Jones?
       </Typography>
       <Typography variant="body1" component="div" sx={{ textAlign: "center" }}>
         Do you want to confirm the fulfillment of the pass exchange with Jalen
