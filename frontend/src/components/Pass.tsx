@@ -97,7 +97,6 @@ export const EditPass = ({
       name={`${name}`}
       descriptions={descriptions}
       buttonTitle={"Complete Pass Exchange"}
-      showMenu={true}
       onPress={modalOpen}
     />
   );
