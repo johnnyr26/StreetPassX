@@ -61,7 +61,7 @@ const Floor = () => {
                 ]}
                 myPass={index === 0}
                 key={key}
-                modalOpen={setModalOpen}
+                modalOpen={() => setModalOpen}
               />
             ))}
           </Box>
