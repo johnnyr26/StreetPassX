@@ -8,19 +8,18 @@ const NewTradeRequest = ({
   return (
     <Button
       sx={{
+        display: "flex",
         backgroundColor: "transparent",
         border: "3px solid #d9d9d9",
         cursor: "pointer",
         borderStyle: "dashed",
         borderRadius: "15px",
-        display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
-        height: "170px",
-        width: "245px",
+        height: "125px",
+        width: "100%",
         padding: "10px",
-        margin: "10px",
       }}
       onClick={() => {
         setModalOpen(true);
