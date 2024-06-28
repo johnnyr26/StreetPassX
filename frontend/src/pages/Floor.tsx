@@ -36,6 +36,14 @@ const Floor = () => {
           </Typography>
           <Box
             sx={{
+              padding: "0 30px",
+              paddingTop: "25px",
+            }}
+          >
+            <NewTradeRequest setModalOpen={setModalOpen} />
+          </Box>
+          <Box
+            sx={{
               paddingTop: "30px",
               display: "flex",
               justifyContent: "center",
@@ -43,47 +51,19 @@ const Floor = () => {
             }}
           >
             <TradeRequestModal modalOpenStates={[modalOpen, setModalOpen]} />
-            <NewTradeRequest setModalOpen={setModalOpen} />
-            <ClaimPass
-              name="1 Pass for Saturday, Sept 23"
-              descriptions={[
-                "For: Any Future Saturday Night Out",
-                "Guest: Jalen Jones",
-              ]}
-              modalOpen={setModalOpen}
-            />
-            <ClaimPass
-              name="1 Pass for Saturday, Sept 23"
-              descriptions={[
-                "For: Any Future Saturday Night Out",
-                "Guest: Jalen Jones",
-              ]}
-              modalOpen={setModalOpen}
-            />
-            <ClaimPass
-              name="1 Pass for Saturday, Sept 23"
-              descriptions={[
-                "For: Any Future Saturday Night Out",
-                "Guest: Jalen Jones",
-              ]}
-              modalOpen={setModalOpen}
-            />
-            <ClaimPass
-              name="1 Pass for Saturday, Sept 23"
-              descriptions={[
-                "For: Any Future Saturday Night Out",
-                "Guest: Jalen Jones",
-              ]}
-              modalOpen={setModalOpen}
-            />
-            <ClaimPass
-              name="1 Pass for Saturday, Sept 23"
-              descriptions={[
-                "For: Any Future Saturday Night Out",
-                "Guest: Jalen Jones",
-              ]}
-              modalOpen={setModalOpen}
-            />
+            {[...new Array(10)].map((key, index) => (
+              <ClaimPass
+                name="1 Pass for Saturday, Sept 23"
+                descriptions={[
+                  "User: Nathan Drogin",
+                  "For: Any Future Saturday Night Out",
+                  "Guest: Charlie Palmer",
+                ]}
+                myPass={index === 0}
+                key={key}
+                modalOpen={setModalOpen}
+              />
+            ))}
           </Box>
         </Box>
       </Box>
