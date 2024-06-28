@@ -18,19 +18,33 @@ const Pass = ({
   return (
     <Card
       sx={{
-        height: "150px",
+        height: "max-content",
         minWidth: "225px",
         padding: "10px",
         margin: "10px",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between",
       }}
     >
-      <Typography variant="h5" component="div">
+      <Typography
+        variant="h5"
+        component="div"
+        style={{
+          position: "relative",
+          top: "0px",
+        }}
+      >
         {name}
       </Typography>
-      <Box>
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          margin: "10px 0",
+        }}
+      >
         {descriptions.map((description, index) => (
           <Typography
             variant="body1"
@@ -51,17 +65,19 @@ const Pass = ({
 export const ClaimPass = ({
   name,
   descriptions,
+  myPass = false,
   modalOpen,
 }: {
   name: string;
   descriptions: string[];
+  myPass?: boolean;
   modalOpen: () => void;
 }) => {
   return (
     <Pass
       name={name}
       descriptions={descriptions}
-      buttonTitle={"Fulfill Pass Exchange"}
+      buttonTitle={myPass ? "Edit Pass" : "Accept Pass Request"}
       onPress={modalOpen}
     />
   );
@@ -78,9 +94,10 @@ export const EditPass = ({
 }) => {
   return (
     <Pass
-      name={`Guest: ${name}`}
+      name={`${name}`}
       descriptions={descriptions}
-      buttonTitle={"Edit Pass"}
+      buttonTitle={"Complete Pass Exchange"}
+      showMenu={true}
       onPress={modalOpen}
     />
   );
