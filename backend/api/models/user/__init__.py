@@ -7,7 +7,6 @@ class User(BaseModel):
     name: str = Field()
     email: str = Field()
 
-    outgoing_passes: Optional[list[Spot]]
-    incoming_passes: Optional[list[Spot]]
+    passes: Optional[list[Spot]]
 
     
