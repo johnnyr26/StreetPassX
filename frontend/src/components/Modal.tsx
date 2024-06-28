@@ -72,17 +72,21 @@ export const ClaimPassModal = ({
           mb: "10px",
         }}
       >
-        Fulfill Exchange with Jalen Jones?
+        Complete Exchange with Nathan Drogin?
       </Typography>
       <Typography variant="body1" component="div" sx={{ textAlign: "center" }}>
-        Do you want to confirm the fulfillment of the pass exchange with Jalen
-        Jones? Once this action is done, it cannot be undone.
+        By fulfilling a pass exchange, you are confirming that you have added
+        Nathan Drogin's guest to your list.
       </Typography>
-      <Typography variant="body1" component="div" sx={{ textAlign: "center", color: 'red', mt: '10px' }}>
-        Note that by fulfilling a pass exchange, you are confirming that you have added their guest to your list.
+      <Typography
+        variant="body1"
+        component="div"
+        sx={{ textAlign: "center", color: "red", mt: "10px" }}
+      >
+        Once this action is done, it cannot be undone.
       </Typography>
       <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
-        Confirm
+        I have added Nathan Drogin's guest to the list
       </Button>
     </Modal>
   );
@@ -98,12 +102,14 @@ export const TradeRequestModal = ({
 }) => {
   const [tradeAwayChecked, setTradeAwayChecked] = useState(false);
   const [tradeForChecked, setTradeForChecked] = useState(false);
+  const [guestChecked, setGuestChecked] = useState(false);
   const [, setOpen] = modalOpenStates;
 
   const handleClose = () => {
     setOpen(false);
     setTradeAwayChecked(false);
     setTradeForChecked(false);
+    setGuestChecked(false);
   };
 
   return (
@@ -115,7 +121,7 @@ export const TradeRequestModal = ({
           mb: "10px",
         }}
       >
-        New Trade Request
+        New Pass Exchange Request
       </Typography>
       <FormGroup>
         <TextField
@@ -141,10 +147,10 @@ export const TradeRequestModal = ({
             sx={{
               mr: "5px",
             }}
-            label="Specific Date?"
+            label="Date of event?"
           />
-          <Tooltip title="Setting a date will help notify users when to add members to the list.">
-            <HelpIcon color="primary" sx={{ mr: "15px" }} />
+          <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
+            <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeForChecked && <DatePicker />}
         </Box>
@@ -164,15 +170,38 @@ export const TradeRequestModal = ({
             sx={{
               mr: "5px",
             }}
-            label="Specific Date?"
+            label="Date of event?"
           />
-          <Tooltip title="Setting a date will help with notifying users when to add members to the list.">
-            <HelpIcon color="primary" sx={{ mr: "15px" }} />
+          <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
+            <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeAwayChecked && <DatePicker />}
         </Box>
-        <TextField fullWidth label="Guest?" variant="standard" />{" "}
-        <TextField
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "center",
+            mt: "20px",
+          }}
+        >
+          <FormControlLabel
+            control={
+              <Checkbox onChange={() => setGuestChecked((prev) => !prev)} />
+            }
+            sx={{
+              mr: "5px",
+            }}
+            label="Guests?"
+          />
+          <Tooltip title="Guests can be added or modified after creating a pass exchange request.">
+            <HelpIcon color="primary" sx={{ mr: "10px" }} />
+          </Tooltip>
+        </Box>
+        {guestChecked && (
+          <TextField fullWidth label="Names" variant="standard" />
+        )}
+        {/* <TextField
           fullWidth
           multiline
           label="Additional Note"
@@ -185,7 +214,7 @@ export const TradeRequestModal = ({
               maxHeight: "200px",
             },
           }}
-        />
+        /> */}
         <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
           Submit
         </Button>
