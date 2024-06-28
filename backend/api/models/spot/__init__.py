@@ -14,18 +14,16 @@ class SpotStatus():
     offered_user_completed: bool = Field(default=False)
     accepted_user_completed: bool = Field(default=False)
 
-
 class Spot(BaseModel):
-    user: str = Field()
+    user: User = Field()
     trade_for: str = Field()
     trade_for_date: Optional[date]
     trade_away: str = Field()
     trade_away_date: Optional[date]
-    additional_note: Optional[str]
 
-    trade_status: SpotTradeRequestStatus
     accepted_user: Optional[User]
 
+    trade_status: SpotTradeRequestStatus
     spot_status: SpotStatus
 
 
