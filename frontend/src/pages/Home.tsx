@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import Box from "@mui/material/Box";
 
-import { ClaimPass } from "../components/Pass";
+import { EditPass } from "../components/Pass";
 import NavBar from "../components/Navbar";
 import Sidebar from "../components/Sidebar";
 import { ClaimPassModal } from "../components/Modal";
@@ -37,41 +37,14 @@ const Home = () => {
             }}
           >
             <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
-            <ClaimPass
-              name="Jalen Jones"
-              descriptions={["Guest: Jalen Jones", "Event: Sunday Funday"]}
-              modalOpen={() => setOpenModal(true)}
-            />
+            {[...new Array(6)].map((key) => (
+              <EditPass
+                name="Nathan Drogin"
+                descriptions={["Event: Sunday Funday", "Guest: Charlie Palmer", "Date: 09/15/2024"]}
+                key={key}
+                modalOpen={() => setOpenModal(true)}
+              />
+            ))}
           </Box>
         </Box>
       </Box>
