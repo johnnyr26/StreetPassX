@@ -7,7 +7,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.tsx";
-import Lineup from "./pages/Lineup.tsx";
 import Floor from "./pages/Floor.tsx";
 
 import { theme } from "../style/theme.ts";
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
-  },
-  {
-    path: "/lineup",
-    element: <Lineup />,
   },
   {
     path: "/floor",

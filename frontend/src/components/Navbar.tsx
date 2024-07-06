@@ -34,15 +34,6 @@ const NavBar = () => {
               My Passes
             </Typography>
           </Link>
-          {/* <Link
-            href="/lineup"
-            color="inherit"
-            sx={{ textDecoration: "none", ml: "36px" }}
-          >
-            <Typography variant="h6" component="div">
-              My Lineup
-            </Typography>
-          </Link> */}
         </Toolbar>
       </AppBar>
     </Box>
