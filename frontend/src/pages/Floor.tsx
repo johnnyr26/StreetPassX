@@ -5,10 +5,12 @@ import { Box, Typography } from "@mui/material";
 import ClaimPass from "../components/pass/ClaimPass";
 import NavBar from "../components/Navbar";
 import TradeRequestModal from "../components/modal/TradeRequestModal";
+import AcceptPassRequestModal from "../components/modal/AcceptPassRequestModal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Floor = () => {
-  const [modalOpen, setModalOpen] = useState(false);
+  const [tradeRequestModalOpen, setTradeRequestModalOpen] = useState(false);
+  const [acceptPassModalOpen, setAcceptPassModalOpen] = useState(false);
 
   return (
     <Box
@@ -29,7 +31,10 @@ const Floor = () => {
       >
         {/* Allows the cards to wrap without being stretched */}
         <Box sx={{ width: "100%" }}>
-          <TradeRequestModal modalOpenStates={[modalOpen, setModalOpen]} />
+          <TradeRequestModal modalOpenStates={[tradeRequestModalOpen, setTradeRequestModalOpen]} />
+          <AcceptPassRequestModal
+            modalOpenStates={[acceptPassModalOpen, setAcceptPassModalOpen]}
+          />
           <Typography
             variant="h3"
             sx={{ paddingTop: "30px", textAlign: "center" }}
@@ -44,7 +49,7 @@ const Floor = () => {
               flexFlow: "row wrap",
             }}
           >
-            <NewTradeRequest setModalOpen={setModalOpen} />
+            <NewTradeRequest setModalOpen={setTradeRequestModalOpen} />
             {[...new Array(3)].map((key) => (
               <ClaimPass
                 name="1 Pass for Saturday, Sept 23"
@@ -55,7 +60,7 @@ const Floor = () => {
                 ]}
                 myPass={true}
                 key={key}
-                modalOpen={() => setModalOpen}
+                modalOpen={() => { setTradeRequestModalOpen(true) }}
               />
             ))}
           </Box>
@@ -79,7 +84,7 @@ const Floor = () => {
                   "Guest: Charlie Palmer",
                 ]}
                 key={key}
-                modalOpen={() => setModalOpen}
+                modalOpen={() => { setAcceptPassModalOpen(true) }}
               />
             ))}
           </Box>

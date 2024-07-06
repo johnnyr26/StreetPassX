@@ -29,19 +29,15 @@ const AcceptPassRequestModal = ({
       >
         Accept Pass Exchange with Nathan Drogin?
       </Typography>
-      <Typography variant="body1" component="div" sx={{ textAlign: "center" }}>
-        By fulfilling a pass exchange, you are confirming that you have added
-        Nathan Drogin's guest to your list.
-      </Typography>
       <Typography
         variant="body1"
         component="div"
-        sx={{ textAlign: "center", color: "red", mt: "10px" }}
+        sx={{ textAlign: "center", color: "red", mt: "24px" }}
       >
         Once this action is done, it cannot be undone.
       </Typography>
       <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
-        I have added Nathan Drogin's guest to the list
+        Accept Pass Exchange with Nathan Drogin
       </Button>
     </Modal>
   );
