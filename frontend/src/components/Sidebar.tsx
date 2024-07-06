@@ -39,51 +39,51 @@ const Sidebar = () => {
       <Typography
         variant="h4"
         component="div"
-        sx={{ flexGrow: 1, fontWeight: "bold" }}
+        sx={{ flexGrow: 1 }}
       >
         My Passes
       </Typography>
 
       <MyPass
         event="Sunday Funday"
-        from="Jalen Jones"
-        guest="Andrei Iosivas"
+        member="Jalen Jones"
+        guests="Andrei Iosivas"
         onList={false}
       />
       <MyPass
         event="Saturday Night Out"
-        from="Walker Dubreuil"
-        guest="Charlie Palmer"
+        member="Walker Dubreuil"
+        guests="Charlie Palmer"
         onList={true}
       />
       <MyPass
         event="Sunday Funday"
-        from="James Cross"
-        guest="James McGibbons"
+        member="James Cross"
+        guests="James McGibbons"
         onList={false}
       />
       <MyPass
         event="Sunday Funday"
-        from="Charlotte Myers"
-        guest="Sofia Michaelides"
+        member="Charlotte Myers"
+        guests="Sofia Michaelides"
         onList={false}
       />
       <MyPass
         event="Sunday Funday"
-        from="Liv Bobby"
-        guest="Samantha Handwerk"
+        member="Liv Bobby"
+        guests="Samantha Handwerk"
         onList={true}
       />
       <MyPass
         event="Sunday Funday"
-        from="Charlotte Myers"
-        guest="Sofia Michaelides"
+        member="Charlotte Myers"
+        guests="Sofia Michaelides"
         onList={false}
       />
       <MyPass
         event="Sunday Funday"
-        from="Liv Bobby"
-        guest="Samantha Handwerk"
+        member="Liv Bobby"
+        guests="Samantha Handwerk"
         onList={true}
       />
     </Box>
