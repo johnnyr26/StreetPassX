@@ -30,7 +30,7 @@ const NewTradeRequest = ({
         component="div"
         sx={{ textAlign: "center", color: "#a9a9a9" }}
       >
-        New Trade Request
+        New Pass Exchange Request
       </Typography>
       <Typography
         variant="h4"

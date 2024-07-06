@@ -2,9 +2,9 @@ import { useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { ClaimPass } from "../components/Pass";
+import ClaimPass from "../components/pass/ClaimPass";
 import NavBar from "../components/Navbar";
-import { TradeRequestModal } from "../components/Modal";
+import TradeRequestModal from "../components/modal/TradeRequestModal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Floor = () => {
@@ -24,34 +24,28 @@ const Floor = () => {
           flex: 1,
           display: "flex",
           flexDirection: "row",
+          width: "100%",
         }}
       >
         {/* Allows the cards to wrap without being stretched */}
-        <Box>
+        <Box sx={{ width: "100%" }}>
+          <TradeRequestModal modalOpenStates={[modalOpen, setModalOpen]} />
           <Typography
-            variant="h2"
+            variant="h3"
             sx={{ paddingTop: "30px", textAlign: "center" }}
           >
-            Trading Floor
+            My Passes
           </Typography>
           <Box
             sx={{
-              padding: "0 30px",
-              paddingTop: "25px",
-            }}
-          >
-            <NewTradeRequest setModalOpen={setModalOpen} />
-          </Box>
-          <Box
-            sx={{
-              paddingTop: "30px",
+              padding: "30px",
               display: "flex",
               justifyContent: "center",
               flexFlow: "row wrap",
             }}
           >
-            <TradeRequestModal modalOpenStates={[modalOpen, setModalOpen]} />
-            {[...new Array(10)].map((key, index) => (
+            <NewTradeRequest setModalOpen={setModalOpen} />
+            {[...new Array(3)].map((key) => (
               <ClaimPass
                 name="1 Pass for Saturday, Sept 23"
                 descriptions={[
@@ -59,7 +53,31 @@ const Floor = () => {
                   "For: Any Future Saturday Night Out",
                   "Guest: Charlie Palmer",
                 ]}
-                myPass={index === 0}
+                myPass={true}
+                key={key}
+                modalOpen={() => setModalOpen}
+              />
+            ))}
+          </Box>
+          <Typography variant="h3" sx={{ textAlign: "center" }}>
+            Trading Floor
+          </Typography>
+          <Box
+            sx={{
+              padding: "30px",
+              display: "flex",
+              justifyContent: "center",
+              flexFlow: "row wrap",
+            }}
+          >
+            {[...new Array(12)].map((key) => (
+              <ClaimPass
+                name="1 Pass for Saturday, Sept 23"
+                descriptions={[
+                  "User: Nathan Drogin",
+                  "For: Any Future Saturday Night Out",
+                  "Guest: Charlie Palmer",
+                ]}
                 key={key}
                 modalOpen={() => setModalOpen}
               />

@@ -2,9 +2,10 @@ import { useState } from "react";
 
 import { Box, Typography } from "@mui/material";
 
-import { EditPass } from "../components/Pass";
+import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
-import { ClaimPassModal, TradeRequestModal } from "../components/Modal";
+import ClaimPassModal from "../components/modal/ClaimPassModal";
+import TradeRequestModal from "../components/modal/TradeRequestModal";
 import NewTradeRequest from "../components/NewTradeRequest";
 
 const Lineup = () => {
@@ -27,7 +28,7 @@ const Lineup = () => {
           flexDirection: "row",
         }}
       >
-        {/* Allows the cards to wrap without being stretched */}
+        {/* Box allows the cards to wrap without being stretched */}
         <Box>
           <Typography
             variant="h2"

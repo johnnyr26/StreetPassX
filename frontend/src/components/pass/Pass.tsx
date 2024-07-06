@@ -1,8 +1,8 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 
-import Button from "../elements/Button";
-import Card from "../elements/Card";
+import Button from "../../elements/Button";
+import Card from "../../elements/Card";
 
 const Pass = ({
   name,
@@ -62,42 +62,4 @@ const Pass = ({
   );
 };
 
-export const ClaimPass = ({
-  name,
-  descriptions,
-  myPass = false,
-  modalOpen,
-}: {
-  name: string;
-  descriptions: string[];
-  myPass?: boolean;
-  modalOpen: () => void;
-}) => {
-  return (
-    <Pass
-      name={name}
-      descriptions={descriptions}
-      buttonTitle={myPass ? "Edit Pass" : "Accept Pass Request"}
-      onPress={modalOpen}
-    />
-  );
-};
-
-export const EditPass = ({
-  name,
-  descriptions,
-  modalOpen,
-}: {
-  name: string;
-  descriptions: string[];
-  modalOpen: () => void;
-}) => {
-  return (
-    <Pass
-      name={`${name}`}
-      descriptions={descriptions}
-      buttonTitle={"Complete Pass Exchange"}
-      onPress={modalOpen}
-    />
-  );
-};
+export default Pass;
