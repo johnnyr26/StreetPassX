@@ -1,6 +1,8 @@
 from pymongo import MongoClient
 import os
 from dotenv import load_dotenv
+from backend.api.models.passes import Pass
+from backend.api.models.user import User
 
 load_dotenv()
 
@@ -18,9 +20,17 @@ db = get_database()
 
 # Fetches all of the passes created so far
 def get_passes():
-   passes = db['passes'].find()
+   passes = list(db['passes'].find({}, {'_id': 0}))
    return passes
 
-def insert_pass(guest_pass: dict[str, object]):
+def create_pass(new_pass: Pass):
    passes = db['passes']
-   passes.insert_one(guest_pass)
+   passes.insert_one(new_pass.to_bson())
+
+def get_users():
+   users = list(db['users'].find({}, {'_id': 0}))
+   return users
+
+def create_user(user: User):
+   passes = db['users']
+   passes.insert_one(user.to_bson())
