@@ -1,5 +1,5 @@
-from backend.api.models.user import User
-from backend.db import get_database
+from user import User
+from ....db import get_database
 
 db = get_database()
 

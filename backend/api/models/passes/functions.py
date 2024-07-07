@@ -1,5 +1,5 @@
-from backend.api.models.passes import Pass
-from backend.db import get_database
+from ..passes import Pass
+from ....db import get_database
 
 db = get_database()
 passes = db['passes']
