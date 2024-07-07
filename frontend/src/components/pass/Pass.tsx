@@ -18,12 +18,13 @@ const Pass = ({
   return (
     <Card
       sx={{
+        boxSizing: "border-box",
+        display: "flex",
+        width: "100%",
+        flexDirection: "column",
         height: "max-content",
-        minWidth: "225px",
         padding: "10px",
         margin: "10px",
-        display: "flex",
-        flexDirection: "column",
       }}
     >
       <Typography

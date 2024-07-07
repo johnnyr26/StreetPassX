@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Box, Typography } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 import ClaimPass from "../components/pass/ClaimPass";
 import NavBar from "../components/Navbar";
@@ -31,7 +31,9 @@ const Floor = () => {
       >
         {/* Allows the cards to wrap without being stretched */}
         <Box sx={{ width: "100%" }}>
-          <TradeRequestModal modalOpenStates={[tradeRequestModalOpen, setTradeRequestModalOpen]} />
+          <TradeRequestModal
+            modalOpenStates={[tradeRequestModalOpen, setTradeRequestModalOpen]}
+          />
           <AcceptPassRequestModal
             modalOpenStates={[acceptPassModalOpen, setAcceptPassModalOpen]}
           />
@@ -41,53 +43,70 @@ const Floor = () => {
           >
             My Passes
           </Typography>
-          <Box
+          <Grid
+            container
+            spacing={3}
             sx={{
-              padding: "30px",
               display: "flex",
+              alignItems: "center",
               justifyContent: "center",
-              flexFlow: "row wrap",
             }}
+            columns={{ xs: 4, sm: 8, md: 14 }}
           >
-            <NewTradeRequest setModalOpen={setTradeRequestModalOpen} />
+            <Grid item xs={1} sm={2} md={3}>
+              <NewTradeRequest setModalOpen={setTradeRequestModalOpen} />
+            </Grid>
             {[...new Array(3)].map((key) => (
-              <ClaimPass
-                name="1 Pass for Saturday, Sept 23"
-                descriptions={[
-                  "User: Nathan Drogin",
-                  "For: Any Future Saturday Night Out",
-                  "Guest: Charlie Palmer",
-                ]}
-                myPass={true}
-                key={key}
-                modalOpen={() => { setTradeRequestModalOpen(true) }}
-              />
+              <Grid item xs={1} sm={2} md={3} key={key}>
+                <ClaimPass
+                  name="1 Pass for Saturday, Sept 23"
+                  descriptions={[
+                    "User: Nathan Drogin",
+                    "For: Any Future Saturday Night Out",
+                    "Guest: Charlie Palmer",
+                  ]}
+                  myPass={true}
+                  key={key}
+                  modalOpen={() => {
+                    setTradeRequestModalOpen(true);
+                  }}
+                />
+              </Grid>
             ))}
-          </Box>
-          <Typography variant="h3" sx={{ textAlign: "center" }}>
+          </Grid>
+          <Typography
+            variant="h3"
+            sx={{ textAlign: "center", marginTop: "30px" }}
+          >
             Trading Floor
           </Typography>
-          <Box
+          <Grid
+            container
+            spacing={3}
             sx={{
-              padding: "30px",
               display: "flex",
+              alignItems: "center",
               justifyContent: "center",
-              flexFlow: "row wrap",
             }}
+            columns={{ xs: 4, sm: 8, md: 13 }}
           >
             {[...new Array(12)].map((key) => (
-              <ClaimPass
-                name="1 Pass for Saturday, Sept 23"
-                descriptions={[
-                  "User: Nathan Drogin",
-                  "For: Any Future Saturday Night Out",
-                  "Guest: Charlie Palmer",
-                ]}
-                key={key}
-                modalOpen={() => { setAcceptPassModalOpen(true) }}
-              />
+              <Grid item xs={1} sm={2} md={4}>
+                <ClaimPass
+                  name="1 Pass for Saturday, Sept 23"
+                  descriptions={[
+                    "User: Nathan Drogin",
+                    "For: Any Future Saturday Night Out",
+                    "Guest: Charlie Palmer",
+                  ]}
+                  key={key}
+                  modalOpen={() => {
+                    setAcceptPassModalOpen(true);
+                  }}
+                />
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Box>
       </Box>
     </Box>
