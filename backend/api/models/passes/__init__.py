@@ -5,7 +5,7 @@ from typing import Optional
 from pydantic import BaseModel, Field
 from enum import Enum
 
-from backend.api.models.user import User
+from ..user import User
 
 class PassStatus(Enum):
     # user accepts trade request, has not completed exchange

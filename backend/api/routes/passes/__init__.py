@@ -1,10 +1,10 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime
-from backend.api.models.passes import Pass
-from backend.api.models.passes.functions import get_passes, create_pass
-from backend.api.models.user.functions import get_user_by_email
-from backend.utils.exceptions import UserNotFoundException
-from backend.utils.exceptions.http import HttpBadRequest, HttpInternalServerError
+from ...models.passes import Pass
+from ...models.passes.functions import get_passes, create_pass
+from ...models.user.functions import get_user_by_email
+from ....utils.exceptions import UserNotFoundException
+from ....utils.exceptions.http import HttpBadRequest, HttpInternalServerError
 
 passes = Blueprint('passes', __name__, url_prefix='/passes')
 
