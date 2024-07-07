@@ -36,7 +36,12 @@ def api_create_pass():
 
         # return json of the new pass
         return new_pass.to_json()
-    except HttpBadRequest:
+    except HttpBadRequest as ex:
+        print(ex)
         return HttpBadRequest("The request body is invalid.")
-    except (UserNotFoundException, Exception) as ex:
+    except UserNotFoundException as ex:
+        print(ex)
+        return HttpInternalServerError(ex)
+    except Exception as ex:
+        print(ex)
         return HttpInternalServerError(ex)

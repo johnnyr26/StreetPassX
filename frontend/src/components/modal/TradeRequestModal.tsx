@@ -13,6 +13,7 @@ import HelpIcon from "@mui/icons-material/Help";
 
 import Modal from "./Modal";
 import Button from "../../elements/Button";
+import { createPass } from "../../api/index";
 
 const TradeRequestModal = ({
   modalOpenStates,
@@ -22,9 +23,14 @@ const TradeRequestModal = ({
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
 }) => {
-  const [tradeAwayChecked, setTradeAwayChecked] = useState(false);
-  const [tradeForChecked, setTradeForChecked] = useState(false);
-  const [guestChecked, setGuestChecked] = useState(false);
+  const [tradeFor, setTradeFor] = useState<string>('');
+  const [tradeForChecked, setTradeForChecked] = useState<boolean>(false);
+  const [tradeForDate, setTradeForDate] = useState<Date>();
+  const [tradeAway, setTradeAway] = useState<string>('');
+  const [tradeAwayChecked, setTradeAwayChecked] = useState<boolean>(false);
+  const [tradeAwayDate, setTradeAwayDate] = useState<Date>();
+  const [guestChecked, setGuestChecked] = useState<boolean>(false);
+  const [guests, setGuests] = useState<string>("");
   const [, setOpen] = modalOpenStates;
 
   const handleClose = () => {
@@ -32,6 +38,25 @@ const TradeRequestModal = ({
     setTradeAwayChecked(false);
     setTradeForChecked(false);
     setGuestChecked(false);
+  };
+
+  const handleCreatePass = async () => {
+    try {
+        const args = {
+          email: "jr9845@princeton.edu",
+          trade_for: tradeFor,
+          trade_for_date: tradeForDate?.toString(),
+          trade_away: tradeAway,
+          trade_away_date: tradeAwayDate?.toString(),
+          guests: guests,
+        };
+        const response = await createPass(args);
+        console.log(response);
+        alert("Pass has been created successfully.");
+    } catch (error) {
+      console.error(error);
+      alert("An error occured when creating a new pass. Please try again.");
+    }
   };
 
   return (
@@ -52,6 +77,9 @@ const TradeRequestModal = ({
           variant="standard"
           sx={{
             mr: "10px",
+          }}
+          onChange={(e) => {
+            setTradeFor(e.target.value);
           }}
         />
         <Box
@@ -74,9 +102,20 @@ const TradeRequestModal = ({
           <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
-          {tradeForChecked && <DatePicker />}
+          {tradeForChecked && (
+            <DatePicker
+              onChange={(newDate) => setTradeForDate(newDate?.toDate())}
+            />
+          )}
         </Box>
-        <TextField fullWidth label="Trading Away" variant="standard" />
+        <TextField
+          fullWidth
+          label="Trading Away"
+          variant="standard"
+          onChange={(e) => {
+            setTradeAway(e.target.value);
+          }}
+        />
         <Box
           sx={{
             display: "flex",
@@ -97,7 +136,11 @@ const TradeRequestModal = ({
           <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
-          {tradeAwayChecked && <DatePicker />}
+          {tradeAwayChecked && (
+            <DatePicker
+              onChange={(newDate) => setTradeAwayDate(newDate?.toDate())}
+            />
+          )}
         </Box>
         <Box
           sx={{
@@ -121,23 +164,17 @@ const TradeRequestModal = ({
           </Tooltip>
         </Box>
         {guestChecked && (
-          <TextField fullWidth label="Names" variant="standard" />
+          <TextField
+            fullWidth
+            label="Names"
+            variant="standard"
+            onChange={(e) => setGuests(e.target.value)}
+          />
         )}
-        {/* <TextField
-          fullWidth
-          multiline
-          label="Additional Note"
-          variant="standard"
-          sx={{
-            mt: "30px",
-          }}
-          inputProps={{
-            style: {
-              maxHeight: "200px",
-            },
-          }}
-        /> */}
-        <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={() => {}}>
+        <Button
+          sx={{ mt: "24px", fontSize: "18px" }}
+          onClick={handleCreatePass}
+        >
           Submit
         </Button>
       </FormGroup>

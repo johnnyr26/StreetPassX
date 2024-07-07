@@ -91,7 +91,7 @@ const Floor = () => {
             columns={{ xs: 4, sm: 8, md: 13 }}
           >
             {[...new Array(12)].map((key) => (
-              <Grid item xs={1} sm={2} md={4}>
+              <Grid item xs={1} sm={2} md={4} key={key}>
                 <ClaimPass
                   name="1 Pass for Saturday, Sept 23"
                   descriptions={[

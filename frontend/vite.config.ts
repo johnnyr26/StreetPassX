@@ -9,10 +9,11 @@ export default defineConfig({
       // Using the proxy instance
       '/passes': {
         target: 'http://127.0.0.1:5000',
-        changeOrigin: true,
-        configure: (proxy, options) => {
-          // proxy will be an instance of 'http-proxy'
-        },
+        changeOrigin: true
+      },
+       '/user': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true
       },
     },
   },
