@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import Box from "@mui/material/Box";
+import { Box, Grid } from "@mui/material";
 
 import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
@@ -28,28 +28,32 @@ const Home = () => {
         <Sidebar />
         {/* Allows the cards to wrap without being stretched */}
         <Box>
-          <Box
+          <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
+          <Grid
+            container
+            spacing={3}
+            columns={{ xs: 4, sm: 8, md: 13 }}
             sx={{
+              boxSizing: "border-box",
               paddingTop: "30px",
               display: "flex",
               justifyContent: "center",
-              flexFlow: "row wrap",
             }}
           >
-            <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
             {[...new Array(6)].map((key) => (
-              <EditPass
-                name="Nathan Drogin"
-                descriptions={[
-                  "Event: Sunday Funday",
-                  "Guest: Charlie Palmer",
-                  "Date: 09/15/2024",
-                ]}
-                key={key}
-                modalOpen={() => setOpenModal(true)}
-              />
+              <Grid item xs={1} sm={2} md={4} key={key}>
+                <EditPass
+                  name="Nathan Drogin"
+                  descriptions={[
+                    "Event: Sunday Funday",
+                    "Guest: Charlie Palmer",
+                    "Date: 09/15/2024",
+                  ]}
+                  modalOpen={() => setOpenModal(true)}
+                />
+              </Grid>
             ))}
-          </Box>
+          </Grid>
         </Box>
       </Box>
     </Box>
