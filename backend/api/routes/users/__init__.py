@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from backend.db import get_users, create_user
+from backend.api.models.user.functions import get_users, create_user
 from backend.api.models.user import User
 
 user = Blueprint('user', __name__, url_prefix='/user')
