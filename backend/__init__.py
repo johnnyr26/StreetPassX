@@ -1,5 +1,5 @@
 from flask import Flask
-from api.routes import register_routes
+from backend.api.routes import register_routes
 
 def create_app():
     app = Flask(__name__)

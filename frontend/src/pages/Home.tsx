@@ -1,14 +1,34 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+
+import { Pass, getPendingPasses } from "../api/Pass";
 
 import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
-import Sidebar from "../components/Sidebar";
+// import Sidebar from "../components/Sidebar";
 import ClaimPassModal from "../components/modal/ClaimPassModal";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [myPasses, setMyPasses] = useState<Pass[]>([]);
+
+  const getPasses = useCallback(async () => {
+    try {
+      const passes = await getPendingPasses();
+      const myPasses = passes.filter(pass => pass.user.name === 'Johnny Ramirez');
+      setMyPasses(myPasses)
+    } catch (error) {
+      console.error(error)
+      alert("Error detected when attempting to fetch passes. Try again.")
+    }
+  }, []);
+
+  useEffect(() => {
+    getPasses();
+  }, [getPasses]);
+
+
   return (
     <Box
       sx={{
@@ -25,10 +45,13 @@ const Home = () => {
           flexDirection: "row",
         }}
       >
-        <Sidebar />
+        {/* <Sidebar /> */}
         {/* Allows the cards to wrap without being stretched */}
         <Box>
           <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
+          <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
+            My Passes
+          </Typography>
           <Grid
             container
             spacing={3}
@@ -40,14 +63,14 @@ const Home = () => {
               justifyContent: "center",
             }}
           >
-            {[...new Array(6)].map((key) => (
-              <Grid item xs={1} sm={2} md={4} key={key}>
+            {myPasses.map((pass, index) => (
+              <Grid item xs={1} sm={2} md={4} key={`${pass},${index}`}>
                 <EditPass
-                  name="Nathan Drogin"
+                  name={pass.user.name}
                   descriptions={[
-                    "Event: Sunday Funday",
-                    "Guest: Charlie Palmer",
-                    "Date: 09/15/2024",
+                    `Event: ${pass.event}`,
+                    `Guest: ${pass.guests || 'To be determined'}`,
+                    pass.date ? `Date: ${pass.date}` : '',
                   ]}
                   modalOpen={() => setOpenModal(true)}
                 />

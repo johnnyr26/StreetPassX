@@ -1,16 +1,74 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import { Box, Grid, Typography } from "@mui/material";
 
+import { User } from "../api/User";
+
 import ClaimPass from "../components/pass/ClaimPass";
 import NavBar from "../components/Navbar";
-import TradeRequestModal from "../components/modal/TradeRequestModal";
+import PassRequestModal from "../components/modal/PassRequestModal";
 import AcceptPassRequestModal from "../components/modal/AcceptPassRequestModal";
-import NewTradeRequest from "../components/NewTradeRequest";
+
+import { PassRequest } from "../api/PassRequest";
+import { getPassRequests } from "../api/PassRequest";
+import Button from "../elements/Button";
 
 const Floor = () => {
-  const [tradeRequestModalOpen, setTradeRequestModalOpen] = useState(false);
+  const [passRequestModalOpen, setPassRequestModalOpen] = useState(false);
   const [acceptPassModalOpen, setAcceptPassModalOpen] = useState(false);
+  const [, setMyPassRequests] = useState<PassRequest[]>([]);
+  const [availablePassRequests, setAvailablePassRequests] = useState<
+    PassRequest[]
+  >([]);
+  const [selectedPassRequest, setSelectedPassRequest] = useState<PassRequest>();
+
+  const handleGetPassRequests = useCallback(async () => {
+    try {
+      const rawPassRequests = await getPassRequests();
+      
+      // convert _id.$oid to just _id
+      const passRequests: PassRequest[] = rawPassRequests.map(
+        (passRequest: {
+          _id: {
+            $oid: string;
+          };
+          user: User;
+          trade_for: string;
+          trade_for_date?: string;
+          trade_away: string;
+          trade_away_date?: string;
+          guests?: string;
+          creationDate: Date;
+        }) => {
+          return {
+            ...passRequest,
+            "_id":  passRequest["_id"]["$oid"] 
+          };
+        }
+      );
+
+      const myPassRequests: PassRequest[] = [];
+      const availablePassRequests: PassRequest[] = [];
+
+      passRequests.forEach((passRequest: PassRequest) => {
+        if (passRequest.user.name === "John Ramirez") {
+          myPassRequests.push(passRequest);
+        } else {
+          availablePassRequests.push(passRequest);
+        }
+      });
+
+      setMyPassRequests(myPassRequests);
+      setAvailablePassRequests(availablePassRequests);
+    } catch (error) {
+      console.log(error);
+      alert("An error occured while attempting to get passes.");
+    }
+  }, []);
+
+  useEffect(() => {
+    handleGetPassRequests();
+  }, [handleGetPassRequests]);
 
   return (
     <Box
@@ -23,63 +81,59 @@ const Floor = () => {
       <NavBar />
       <Box
         sx={{
+          boxSizing: "border-box",
           flex: 1,
           display: "flex",
           flexDirection: "row",
           width: "100%",
+          padding: "0 15px",
         }}
       >
         {/* Allows the cards to wrap without being stretched */}
-        <Box sx={{ width: "100%" }}>
-          <TradeRequestModal
-            modalOpenStates={[tradeRequestModalOpen, setTradeRequestModalOpen]}
-          />
-          <AcceptPassRequestModal
-            modalOpenStates={[acceptPassModalOpen, setAcceptPassModalOpen]}
-          />
-          <Typography
-            variant="h3"
-            sx={{ paddingTop: "30px", textAlign: "center" }}
-          >
-            My Passes
-          </Typography>
-          <Grid
-            container
-            spacing={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-            }}
-            columns={{ xs: 4, sm: 8, md: 14 }}
-          >
-            <Grid item xs={1} sm={2} md={3}>
-              <NewTradeRequest setModalOpen={setTradeRequestModalOpen} />
-            </Grid>
-            {[...new Array(3)].map((key) => (
-              <Grid item xs={1} sm={2} md={3} key={key}>
-                <ClaimPass
-                  name="1 Pass for Saturday, Sept 23"
-                  descriptions={[
-                    "User: Nathan Drogin",
-                    "For: Any Future Saturday Night Out",
-                    "Guest: Charlie Palmer",
-                  ]}
-                  myPass={true}
-                  key={key}
-                  modalOpen={() => {
-                    setTradeRequestModalOpen(true);
-                  }}
-                />
-              </Grid>
-            ))}
-          </Grid>
-          <Typography
-            variant="h3"
-            sx={{ textAlign: "center", marginTop: "30px" }}
-          >
+        <Box
+          sx={{
+            boxSizing: "border-box",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          {passRequestModalOpen && (
+            <PassRequestModal
+              modalOpenStates={[passRequestModalOpen, setPassRequestModalOpen]}
+            />
+          )}
+          {acceptPassModalOpen && (
+            <AcceptPassRequestModal
+              modalOpenStates={[acceptPassModalOpen, setAcceptPassModalOpen]}
+              passRequest={selectedPassRequest}
+            />
+          )}
+          <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             Trading Floor
           </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginBottom: "30px",
+            }}
+          >
+            <Button
+              sx={{
+                borderRadius: "10px",
+                height: "48px",
+                width: "496px",
+                fontSize: "18px",
+                boxShadow: 2,
+              }}
+              disableRipple={false}
+              onClick={() => {
+                setPassRequestModalOpen(true);
+              }}
+            >
+              New Pass Request
+            </Button>
+          </Box>
           <Grid
             container
             spacing={3}
@@ -90,17 +144,17 @@ const Floor = () => {
             }}
             columns={{ xs: 4, sm: 8, md: 13 }}
           >
-            {[...new Array(12)].map((key) => (
-              <Grid item xs={1} sm={2} md={4} key={key}>
+            {availablePassRequests.map((passRequest, index) => (
+              <Grid item xs={1} sm={2} md={3} key={`${index}`}>
                 <ClaimPass
-                  name="1 Pass for Saturday, Sept 23"
+                  name={passRequest.user.name}
                   descriptions={[
-                    "User: Nathan Drogin",
-                    "For: Any Future Saturday Night Out",
-                    "Guest: Charlie Palmer",
+                    `Johnny receives: ${passRequest.trade_for}`,
+                    `${passRequest.user.name} receives: ${passRequest.trade_away}`,
+                    `Guests: ${passRequest.guests || "To be determined"}`,
                   ]}
-                  key={key}
                   modalOpen={() => {
+                    setSelectedPassRequest(passRequest);
                     setAcceptPassModalOpen(true);
                   }}
                 />

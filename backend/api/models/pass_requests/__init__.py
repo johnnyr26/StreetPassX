@@ -7,21 +7,26 @@ from bson import ObjectId
 from backend.api.models.user import User
 from backend.api.models.status import Status
 
-class Pass(BaseModel):
+class PassRequest(BaseModel):
     _id: ObjectId
     user: Optional[User]
-    event: Optional[str]
-    date: Optional[datetime]
+    trade_for: Optional[str]
+    trade_for_date: Optional[datetime] = None
+    trade_away: Optional[str]
+    trade_away_date: Optional[datetime] = None
     guests: Optional[str]
     pass_status: Status = Status.pending
     creation_date: Optional[datetime]
-    completion_date: Optional[datetime] = None
+    visible_users: Optional[list[User]] = None
 
     def to_json(self):
         return jsonable_encoder(self, exclude_none=True)
     
-    def get_id(self):
+    # gets object_id of the pass request
+    def get_id(self) -> ObjectId:
+        print(self._id)
         return self._id
-
-
-
+    
+    # sets _id of pass request to ObjectId
+    def set_id(self, _id: ObjectId):
+        self._id = _id

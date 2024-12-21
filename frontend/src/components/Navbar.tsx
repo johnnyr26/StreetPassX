@@ -8,7 +8,7 @@ const NavBar = () => {
       <AppBar position="static">
         <Toolbar>
           <Link
-            href="/floor"
+            href="/"
             color="inherit"
             sx={{ flexGrow: 1, textDecoration: "none" }}
           >

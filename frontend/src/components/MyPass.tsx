@@ -9,7 +9,7 @@ import MenuItem from "@mui/material/MenuItem";
 
 import Card from "../elements/Card";
 import CancelPassModal from "./modal/CancelPassModal";
-import TradeRequestModal from "./modal/TradeRequestModal";
+import PassRequestModal from "./modal/PassRequestModal";
 
 type PassProps = {
   event: string;
@@ -34,9 +34,9 @@ const Pass = ({ event, member, guests, onList }: PassProps) => {
     handleClose();
   };
 
-  const [tradeRequestModalOpen, setTradeRequestModalOpen] = useState(false);
-  const handleTradeRequestModalOpen = () => {
-    setTradeRequestModalOpen(true);
+  const [PassRequestModalOpen, setPassRequestModalOpen] = useState(false);
+  const handlePassRequestModalOpen = () => {
+    setPassRequestModalOpen(true);
     handleClose();
   };
 
@@ -45,8 +45,8 @@ const Pass = ({ event, member, guests, onList }: PassProps) => {
       <CancelPassModal
         modalOpenStates={[cancelModalOpen, setCancelModalOpen]}
       />
-      <TradeRequestModal
-        modalOpenStates={[tradeRequestModalOpen, setTradeRequestModalOpen]}
+      <PassRequestModal
+        modalOpenStates={[PassRequestModalOpen, setPassRequestModalOpen]}
       />
       <Card
         sx={{
@@ -94,7 +94,7 @@ const Pass = ({ event, member, guests, onList }: PassProps) => {
                 horizontal: "right",
               }}
             >
-              <MenuItem onClick={handleTradeRequestModalOpen}>
+              <MenuItem onClick={handlePassRequestModalOpen}>
                 Edit Guest
               </MenuItem>
               <MenuItem onClick={handleCancelModalOpen}>Cancel Pass</MenuItem>

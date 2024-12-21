@@ -1,6 +1,6 @@
 import { Button, Typography } from "@mui/material";
 
-const NewTradeRequest = ({
+const NewPassRequest = ({
   setModalOpen,
 }: {
   setModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,4 +42,4 @@ const NewTradeRequest = ({
   );
 };
 
-export default NewTradeRequest;
+export default NewPassRequest;

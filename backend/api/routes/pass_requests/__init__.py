@@ -1,0 +1,86 @@
+# external imports
+from flask import Blueprint, request, jsonify
+from datetime import datetime
+
+# model functions imports
+from backend.api.models.passes import Pass
+from backend.api.models.pass_requests import PassRequest
+from backend.api.models.passes.functions import create_pass
+from backend.api.models.pass_requests.functions import create_pass_request, get_pass_requests, get_pass_request_by_id, complete_pass_request
+from backend.api.models.user.functions import get_user_by_email
+
+# error imports
+from backend.utils.exceptions import UserNotFoundException
+from backend.utils.exceptions.http import HttpBadRequest
+from bson import ObjectId
+
+pass_requests = Blueprint('pass_requests', __name__, url_prefix='/pass_requests')
+
+@pass_requests.route('/get_pass_requests', methods=['GET'])
+def api_get_pass_requests():
+    pass_requests = get_pass_requests()
+    return jsonify(pass_requests)
+
+@pass_requests.route('/create_pass_request', methods=['POST'])
+def api_create_pass_request():
+    raw_pass_request = request.get_json()
+    if raw_pass_request is None:
+        raise HttpBadRequest("The request is invalid.")
+    
+    # gets user object from email
+    user = get_user_by_email(raw_pass_request['email'])
+    if user is None:
+        raise UserNotFoundException(email=raw_pass_request['email'])
+    raw_pass_request['user'] = user
+
+    # use the current creation date
+    raw_pass_request['creation_date'] = datetime.now()
+    raw_pass_request['_id'] = ObjectId()
+
+    pass_request = PassRequest(**raw_pass_request)
+    create_pass_request(pass_request)
+
+    return pass_request.to_json()
+
+@pass_requests.route('/accept_pass_request', methods=['POST'])
+def api_accept_pass_request():
+     # gets json request
+    raw_pass_request = request.get_json()
+    if raw_pass_request is None:
+        raise HttpBadRequest()
+    
+    # gets pass request object from id
+    pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
+    
+    # gets accepted user object from email
+    accepted_user = get_user_by_email(email=raw_pass_request.get('email'))
+    if accepted_user is None:
+        raise UserNotFoundException(email=raw_pass_request.get('email'))
+    
+    # create a new pass object for the user who created it.
+    created_user_pass = Pass(
+        _id=ObjectId(),
+        user=pass_request.user,
+        event=pass_request.trade_for,
+        date=pass_request.trade_for_date,
+        guests=pass_request.guests,
+        creation_date=datetime.now()
+    )
+    create_pass(created_user_pass)
+
+    # create another pass object in place for whoever accepts the pass exchange
+    accepted_user_pass = Pass(
+        _id=ObjectId(),
+        user=accepted_user,
+        event=pass_request.trade_away,
+        date=pass_request.trade_away_date,
+        guests=None,
+        creation_date=datetime.now()
+    )
+    create_pass(accepted_user_pass)
+
+    # mark the pass request status as completed
+    pass_request = complete_pass_request(pass_request)
+
+    # return json of the new pass
+    return [created_user_pass.to_json(), accepted_user_pass.to_json()]

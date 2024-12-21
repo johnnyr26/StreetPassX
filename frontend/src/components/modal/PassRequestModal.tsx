@@ -13,9 +13,9 @@ import HelpIcon from "@mui/icons-material/Help";
 
 import Modal from "./Modal";
 import Button from "../../elements/Button";
-import { createPass } from "../../api/index";
+import { createPassRequest } from "../../api/PassRequest";
 
-const TradeRequestModal = ({
+const PassRequestModal = ({
   modalOpenStates,
 }: {
   modalOpenStates: [
@@ -23,10 +23,10 @@ const TradeRequestModal = ({
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
 }) => {
-  const [tradeFor, setTradeFor] = useState<string>('');
+  const [tradeFor, setTradeFor] = useState<string>("");
   const [tradeForChecked, setTradeForChecked] = useState<boolean>(false);
   const [tradeForDate, setTradeForDate] = useState<Date>();
-  const [tradeAway, setTradeAway] = useState<string>('');
+  const [tradeAway, setTradeAway] = useState<string>("");
   const [tradeAwayChecked, setTradeAwayChecked] = useState<boolean>(false);
   const [tradeAwayDate, setTradeAwayDate] = useState<Date>();
   const [guestChecked, setGuestChecked] = useState<boolean>(false);
@@ -40,22 +40,25 @@ const TradeRequestModal = ({
     setGuestChecked(false);
   };
 
-  const handleCreatePass = async () => {
+  const handleCreatePassRequest = async () => {
     try {
-        const args = {
-          email: "jr9845@princeton.edu",
-          trade_for: tradeFor,
-          trade_for_date: tradeForDate?.toString(),
-          trade_away: tradeAway,
-          trade_away_date: tradeAwayDate?.toString(),
-          guests: guests,
-        };
-        const response = await createPass(args);
-        console.log(response);
-        alert("Pass has been created successfully.");
+      const args = {
+        email: "jr9845@princeton.edu",
+        trade_for: tradeFor,
+        trade_for_date: tradeForDate?.toISOString(),
+        trade_away: tradeAway,
+        trade_away_date: tradeAwayDate?.toISOString(),
+        guests: guests,
+      };
+      const response = await createPassRequest(args);
+      console.log(response);
+      alert("Pass request has been created successfully.");
+      setOpen(false);
     } catch (error) {
       console.error(error);
-      alert("An error occured when creating a new pass. Please try again.");
+      alert(
+        "An error occured when creating a new pass request. Please try again."
+      );
     }
   };
 
@@ -173,7 +176,7 @@ const TradeRequestModal = ({
         )}
         <Button
           sx={{ mt: "24px", fontSize: "18px" }}
-          onClick={handleCreatePass}
+          onClick={handleCreatePassRequest}
         >
           Submit
         </Button>
@@ -182,4 +185,4 @@ const TradeRequestModal = ({
   );
 };
 
-export default TradeRequestModal;
+export default PassRequestModal;
