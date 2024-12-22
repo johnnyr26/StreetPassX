@@ -13,15 +13,17 @@ import HelpIcon from "@mui/icons-material/Help";
 
 import Modal from "./Modal";
 import Button from "../../elements/Button";
-import { createPassRequest } from "../../api/PassRequest";
+import { PassRequest, createPassRequest } from "../../api/PassRequest";
 
 const PassRequestModal = ({
   modalOpenStates,
+  setPassRequests,
 }: {
   modalOpenStates: [
     open: boolean,
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
+  setPassRequests: React.Dispatch<React.SetStateAction<PassRequest[]>>
 }) => {
   const [tradeFor, setTradeFor] = useState<string>("");
   const [tradeForChecked, setTradeForChecked] = useState<boolean>(false);
@@ -51,8 +53,9 @@ const PassRequestModal = ({
         guests: guests,
       };
       const response = await createPassRequest(args);
-      console.log(response);
       alert("Pass request has been created successfully.");
+      const newPassRequest: PassRequest = response;
+      setPassRequests((passRequests) => [...passRequests, newPassRequest]);
       setOpen(false);
     } catch (error) {
       console.error(error);

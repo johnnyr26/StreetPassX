@@ -3,16 +3,19 @@ import { Typography } from "@mui/material";
 import Modal from "./Modal";
 import Button from "../../elements/Button";
 import { acceptPassRequest, PassRequest } from "../../api/PassRequest";
+import React from "react";
 
 const AcceptPassRequestModal = ({
   modalOpenStates,
-  passRequest
+  setPassRequests,
+  passRequest,
 }: {
   modalOpenStates: [
     open: boolean,
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
-  passRequest?: PassRequest
+  setPassRequests: React.Dispatch<React.SetStateAction<PassRequest[]>>;
+  passRequest?: PassRequest;
 }) => {
   const [, setOpen] = modalOpenStates;
 
@@ -23,7 +26,7 @@ const AcceptPassRequestModal = ({
   const handleAcceptPassRequest = async () => {
     try {
       if (passRequest === undefined) {
-        throw Error('No pass request has been identified by the modal.')
+        throw Error("No pass request has been identified by the modal.");
       }
 
       const args = {
@@ -40,14 +43,13 @@ const AcceptPassRequestModal = ({
       console.log(response);
 
       alert("Pass has been created successfully.");
+      setPassRequests(passRequests => passRequests.filter(currPassRequest => currPassRequest._id !== passRequest._id))
       setOpen(false);
     } catch (error) {
       console.error(error);
-      alert(
-        "An error occured when creating a new pass. Please try again."
-      );
+      alert("An error occured when creating a new pass. Please try again.");
     }
-  }
+  };
 
   return (
     <Modal modalOpenStates={modalOpenStates} handleClose={handleClose}>
@@ -68,10 +70,13 @@ const AcceptPassRequestModal = ({
       >
         Once this action is done, it cannot be undone.
       </Typography>
-      <Button sx={{ mt: "24px", fontSize: "18px" }} onClick={async () => {
-        await handleAcceptPassRequest()
-        handleClose()
-      }}>
+      <Button
+        sx={{ mt: "24px", fontSize: "18px" }}
+        onClick={async () => {
+          await handleAcceptPassRequest();
+          handleClose();
+        }}
+      >
         Accept Pass Exchange with {passRequest?.user.name}
       </Button>
     </Modal>

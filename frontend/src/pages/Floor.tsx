@@ -100,11 +100,13 @@ const Floor = () => {
           {passRequestModalOpen && (
             <PassRequestModal
               modalOpenStates={[passRequestModalOpen, setPassRequestModalOpen]}
+              setPassRequests={setAvailablePassRequests}
             />
           )}
           {acceptPassModalOpen && (
             <AcceptPassRequestModal
               modalOpenStates={[acceptPassModalOpen, setAcceptPassModalOpen]}
+              setPassRequests={setAvailablePassRequests}
               passRequest={selectedPassRequest}
             />
           )}
