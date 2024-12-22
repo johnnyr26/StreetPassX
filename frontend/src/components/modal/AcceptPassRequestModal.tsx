@@ -59,7 +59,7 @@ const AcceptPassRequestModal = ({
           mb: "10px",
         }}
       >
-        Accept Pass Exchange with Nathan Drogin?
+        Accept Pass Exchange with {passRequest?.user.name}?
       </Typography>
       <Typography
         variant="body1"
@@ -72,7 +72,7 @@ const AcceptPassRequestModal = ({
         await handleAcceptPassRequest()
         handleClose()
       }}>
-        Accept Pass Exchange with Nathan Drogin
+        Accept Pass Exchange with {passRequest?.user.name}
       </Button>
     </Modal>
   );
