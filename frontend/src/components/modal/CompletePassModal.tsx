@@ -17,20 +17,19 @@ const CompletePassModal = ({
 }) => {
   const [, setOpen] = modalOpenStates;
 
-  const handleCompletePass = () => {
+  const handleCompletePass = async () => {
     try {
       if (pass === undefined) {
         throw Error("No pass request has been identified by the modal.");
       }
 
-      const response = completePass(pass);
-      console.log(response);
+      await completePass(pass);
 
       alert('Pass has been completed successfully.');
       setOpen(false);
     } catch (error) {
       console.error(error);
-      alert('An error occurred when attempting to complete pass. Please try again.');
+      alert('An error occurred when attempting to complete the pass. Please try again.');
     }
   }
 
@@ -65,7 +64,7 @@ const CompletePassModal = ({
       >
         Once this action is done, it cannot be undone.
       </Typography>
-      <Button sx={{ mt: "18px", fontSize: "18px" }} onClick={() => handleCompletePass()}>
+      <Button sx={{ mt: "18px", fontSize: "18px" }} onClick={async () => await handleCompletePass()}>
         I have added {pass?.user.name}'s guest to the list
       </Button>
     </Modal>

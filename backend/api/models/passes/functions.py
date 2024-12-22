@@ -41,10 +41,3 @@ def update_pass(curr_pass: Pass):
       passes.update_one({'_id': curr_pass.get_id()}, { '$set': curr_pass.to_json() })
    except Exception as ex:
       print(f"An error occured while attempting to create a new pass: {ex}")
-
-# # completes a pass (user has added guest to the list)
-# def complete_pass(curr_pass: Pass):
-#    try:
-#       passes.update_one({'_id': curr_pass.get_id()}, { 'pass_status': 'completed' })
-#    except Exception as ex:
-#       print(f"An error occured while attempting to complete a pass: {ex}")
