@@ -26,7 +26,8 @@ def get_pass_request_by_id(_id: str) -> PassRequest:
 
 def create_pass_request(pass_request: PassRequest):
    try:
-      pass_requests.insert_one(pass_request.to_json())
+      response = pass_requests.insert_one(pass_request.to_json())
+      pass_request.set_id(response.inserted_id)
    except Exception as ex:
       print(f"An error occured while attempting to create a pass request: {ex}")
 

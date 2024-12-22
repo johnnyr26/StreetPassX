@@ -35,12 +35,14 @@ def api_create_pass_request():
 
     # use the current creation date
     raw_pass_request['creation_date'] = datetime.now()
-    raw_pass_request['_id'] = ObjectId()
 
     pass_request = PassRequest(**raw_pass_request)
     create_pass_request(pass_request)
 
-    return pass_request.to_json()
+    json_pass_request = pass_request.to_json()
+    json_pass_request["_id"] = str(pass_request.get_id())
+
+    return json_pass_request
 
 @pass_requests.route('/accept_pass_request', methods=['POST'])
 def api_accept_pass_request():
@@ -51,7 +53,7 @@ def api_accept_pass_request():
     
     # gets pass request object from id
     pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
-    
+
     # gets accepted user object from email
     accepted_user = get_user_by_email(email=raw_pass_request.get('email'))
     if accepted_user is None:

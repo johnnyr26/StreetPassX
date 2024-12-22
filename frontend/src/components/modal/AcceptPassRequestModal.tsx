@@ -43,7 +43,7 @@ const AcceptPassRequestModal = ({
       console.log(response);
 
       alert("Pass has been created successfully.");
-      setPassRequests(passRequests => passRequests.filter(currPassRequest => currPassRequest._id !== passRequest._id))
+      setPassRequests(passRequests => passRequests.filter(currPassRequest => currPassRequest !== passRequest))
       setOpen(false);
     } catch (error) {
       console.error(error);

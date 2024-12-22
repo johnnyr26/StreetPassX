@@ -4,16 +4,19 @@ import { Pass, completePass } from "../../api/Pass";
 
 import Modal from "./Modal";
 import Button from "../../elements/Button";
+import React from "react";
 
 const CompletePassModal = ({
   modalOpenStates,
-  pass
+  setPasses,
+  pass,
 }: {
   modalOpenStates: [
     open: boolean,
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
-  pass?: Pass
+  setPasses: React.Dispatch<React.SetStateAction<Pass[]>>;
+  pass?: Pass;
 }) => {
   const [, setOpen] = modalOpenStates;
 
@@ -25,13 +28,16 @@ const CompletePassModal = ({
 
       await completePass(pass);
 
-      alert('Pass has been completed successfully.');
+      alert("Pass has been completed successfully.");
+      setPasses(passes => passes.filter(currPass => currPass !== pass))
       setOpen(false);
     } catch (error) {
       console.error(error);
-      alert('An error occurred when attempting to complete the pass. Please try again.');
+      alert(
+        "An error occurred when attempting to complete the pass. Please try again."
+      );
     }
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -64,7 +70,10 @@ const CompletePassModal = ({
       >
         Once this action is done, it cannot be undone.
       </Typography>
-      <Button sx={{ mt: "18px", fontSize: "18px" }} onClick={async () => await handleCompletePass()}>
+      <Button
+        sx={{ mt: "18px", fontSize: "18px" }}
+        onClick={async () => await handleCompletePass()}
+      >
         I have added {pass?.user.name}'s guest to the list
       </Button>
     </Modal>

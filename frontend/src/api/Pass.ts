@@ -1,6 +1,7 @@
 import { User } from "./User";
 
 export type Pass = {
+
   user: User;
   event: string;
   date?: string;

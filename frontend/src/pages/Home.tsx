@@ -50,7 +50,7 @@ const Home = () => {
         {/* <Sidebar /> */}
         {/* Allows the cards to wrap without being stretched */}
         <Box>
-          <CompletePassModal modalOpenStates={[openModal, setOpenModal]} pass={selectedPass} />
+          <CompletePassModal modalOpenStates={[openModal, setOpenModal]} setPasses={setMyPasses} pass={selectedPass} />
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             My Passes
           </Typography>
