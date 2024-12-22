@@ -7,27 +7,29 @@ import { Pass, getPendingPasses } from "../api/Pass";
 import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
 // import Sidebar from "../components/Sidebar";
-import ClaimPassModal from "../components/modal/ClaimPassModal";
+import CompletePassModal from "../components/modal/CompletePassModal";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [myPasses, setMyPasses] = useState<Pass[]>([]);
+  const [selectedPass, setSelectedPass] = useState<Pass>();
 
   const getPasses = useCallback(async () => {
     try {
       const passes = await getPendingPasses();
-      const myPasses = passes.filter(pass => pass.user.name === 'Johnny Ramirez');
-      setMyPasses(myPasses)
+      const myPasses = passes.filter(
+        (pass: Pass) => pass.user.name === "Johnny Ramirez"
+      );
+      setMyPasses(myPasses);
     } catch (error) {
-      console.error(error)
-      alert("Error detected when attempting to fetch passes. Try again.")
+      console.error(error);
+      alert("Error detected when attempting to fetch passes. Try again.");
     }
   }, []);
 
   useEffect(() => {
     getPasses();
   }, [getPasses]);
-
 
   return (
     <Box
@@ -48,7 +50,7 @@ const Home = () => {
         {/* <Sidebar /> */}
         {/* Allows the cards to wrap without being stretched */}
         <Box>
-          <ClaimPassModal modalOpenStates={[openModal, setOpenModal]} />
+          <CompletePassModal modalOpenStates={[openModal, setOpenModal]} pass={selectedPass} />
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             My Passes
           </Typography>
@@ -69,10 +71,13 @@ const Home = () => {
                   name={pass.user.name}
                   descriptions={[
                     `Event: ${pass.event}`,
-                    `Guest: ${pass.guests || 'To be determined'}`,
-                    pass.date ? `Date: ${pass.date}` : '',
+                    `Guest: ${pass.guests || "To be determined"}`,
+                    pass.date ? `Date: ${pass.date}` : "",
                   ]}
-                  modalOpen={() => setOpenModal(true)}
+                  modalOpen={() => {
+                    setSelectedPass(pass);
+                    setOpenModal(true);
+                  }}
                 />
               </Grid>
             ))}

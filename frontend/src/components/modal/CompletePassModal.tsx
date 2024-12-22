@@ -1,17 +1,38 @@
 import { Typography } from "@mui/material";
 
+import { Pass, completePass } from "../../api/Pass";
+
 import Modal from "./Modal";
 import Button from "../../elements/Button";
 
-const ClaimPassModal = ({
+const CompletePassModal = ({
   modalOpenStates,
+  pass
 }: {
   modalOpenStates: [
     open: boolean,
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
+  pass?: Pass
 }) => {
   const [, setOpen] = modalOpenStates;
+
+  const handleCompletePass = () => {
+    try {
+      if (pass === undefined) {
+        throw Error("No pass request has been identified by the modal.");
+      }
+
+      const response = completePass(pass);
+      console.log(response);
+
+      alert('Pass has been completed successfully.');
+      setOpen(false);
+    } catch (error) {
+      console.error(error);
+      alert('An error occurred when attempting to complete pass. Please try again.');
+    }
+  }
 
   const handleClose = () => {
     setOpen(false);
@@ -27,11 +48,15 @@ const ClaimPassModal = ({
           mb: "10px",
         }}
       >
-        Complete Exchange with Nathan Drogin?
+        Complete Exchange with {pass?.user.name}
       </Typography>
-      <Typography variant="body1" component="div" sx={{ textAlign: "center", mt: "18px" }}>
+      <Typography
+        variant="body1"
+        component="div"
+        sx={{ textAlign: "center", mt: "18px" }}
+      >
         By fulfilling a pass exchange, you are confirming that you have added
-        Nathan Drogin's guest to your list.
+        {pass?.user.name}'s guest to your list.
       </Typography>
       <Typography
         variant="body1"
@@ -40,11 +65,11 @@ const ClaimPassModal = ({
       >
         Once this action is done, it cannot be undone.
       </Typography>
-      <Button sx={{ mt: "18px", fontSize: "18px" }} onClick={() => {}}>
-        I have added Nathan Drogin's guest to the list
+      <Button sx={{ mt: "18px", fontSize: "18px" }} onClick={() => handleCompletePass()}>
+        I have added {pass?.user.name}'s guest to the list
       </Button>
     </Modal>
   );
 };
 
-export default ClaimPassModal;
+export default CompletePassModal;

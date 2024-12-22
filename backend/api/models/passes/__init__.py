@@ -11,8 +11,8 @@ class Pass(BaseModel):
     _id: ObjectId
     user: Optional[User]
     event: Optional[str]
-    date: Optional[datetime]
-    guests: Optional[str]
+    date: Optional[datetime] = None
+    guests: Optional[str] = ""
     pass_status: Status = Status.pending
     creation_date: Optional[datetime]
     completion_date: Optional[datetime] = None
@@ -22,6 +22,9 @@ class Pass(BaseModel):
     
     def get_id(self):
         return self._id
+    
+    def set_id(self, _id: ObjectId):
+        self._id = _id
 
 
 

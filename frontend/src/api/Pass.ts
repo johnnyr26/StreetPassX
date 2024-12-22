@@ -30,7 +30,7 @@ export const createPass = async (args: {
     return json;
 };
 
-export const getPendingPasses: () => Promise<Pass[]> = async () => {
+export const getPendingPasses = async () => {
     const response = await fetch('/passes/get_pending_passes');
     if (!response.ok) {
         throw new Error(`An error occured while creating a new pass:', ${response.status })`);
@@ -38,3 +38,18 @@ export const getPendingPasses: () => Promise<Pass[]> = async () => {
     const json = await response.json();
     return json;
 }
+
+export const completePass = async (pass: Pass) => {
+    const response = await fetch('/passes/complete_pass', {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(pass),
+    });
+    if (!response.ok) {
+        throw new Error(`An error occured while creating a new pass:', ${response.status })`);
+    }
+    const json = await response.json();
+    return json;
+};

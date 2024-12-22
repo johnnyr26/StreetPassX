@@ -24,7 +24,6 @@ class PassRequest(BaseModel):
     
     # gets object_id of the pass request
     def get_id(self) -> ObjectId:
-        print(self._id)
         return self._id
     
     # sets _id of pass request to ObjectId
