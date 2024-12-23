@@ -79,17 +79,24 @@ const Home = () => {
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             My Passes
           </Typography>
-          <ToggleButtonGroup
-            color="primary"
-            value={alignment}
-            exclusive
-            onChange={handleChange}
-            aria-label="Platform"
-            sx={{}}
+          <Box
+            sx={{ display: "flex", justifyContent: "center", margin: "20px 0" }}
           >
-            <ToggleButton value="Incoming Passes">Incoming Passes</ToggleButton>
-            <ToggleButton value="Outgoing Passes">Outgoing Passes</ToggleButton>
-          </ToggleButtonGroup>
+            <ToggleButtonGroup
+              color="primary"
+              value={alignment}
+              exclusive
+              onChange={handleChange}
+              aria-label="Platform"
+            >
+              <ToggleButton value="Incoming Passes">
+                Incoming Passes
+              </ToggleButton>
+              <ToggleButton value="Outgoing Passes">
+                Outgoing Passes
+              </ToggleButton>
+            </ToggleButtonGroup>
+          </Box>
           <Grid
             container
             spacing={3}
