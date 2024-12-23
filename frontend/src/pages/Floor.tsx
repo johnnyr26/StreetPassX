@@ -84,9 +84,6 @@ const Floor = () => {
           boxSizing: "border-box",
           flex: 1,
           display: "flex",
-          flexDirection: "row",
-          width: "100%",
-          padding: "0 15px",
         }}
       >
         {/* Allows the cards to wrap without being stretched */}

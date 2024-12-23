@@ -49,8 +49,18 @@ const Home = () => {
       >
         {/* <Sidebar /> */}
         {/* Allows the cards to wrap without being stretched */}
-        <Box>
-          <CompletePassModal modalOpenStates={[openModal, setOpenModal]} setPasses={setMyPasses} pass={selectedPass} />
+        <Box
+          sx={{
+            boxSizing: "border-box",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <CompletePassModal
+            modalOpenStates={[openModal, setOpenModal]}
+            setPasses={setMyPasses}
+            pass={selectedPass}
+          />
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             My Passes
           </Typography>
@@ -63,10 +73,11 @@ const Home = () => {
               paddingTop: "30px",
               display: "flex",
               justifyContent: "center",
+              alignItems: "center",
             }}
           >
             {myPasses.map((pass, index) => (
-              <Grid item xs={1} sm={2} md={4} key={`${pass},${index}`}>
+              <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
                 <EditPass
                   name={pass.user.name}
                   descriptions={[
