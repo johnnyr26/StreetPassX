@@ -1,6 +1,12 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Box, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Grid,
+  ToggleButtonGroup,
+  ToggleButton,
+  Typography,
+} from "@mui/material";
 
 import { Pass, getPendingPasses } from "../api/Pass";
 
@@ -13,6 +19,14 @@ const Home = () => {
   const [openModal, setOpenModal] = useState(false);
   const [myPasses, setMyPasses] = useState<Pass[]>([]);
   const [selectedPass, setSelectedPass] = useState<Pass>();
+  const [alignment, setAlignment] = useState<string>("Incoming Passes");
+
+  const handleChange = (
+    event: React.MouseEvent<HTMLElement>,
+    newAlignment: string
+  ) => {
+    setAlignment(newAlignment);
+  };
 
   const getPasses = useCallback(async () => {
     try {
@@ -53,6 +67,7 @@ const Home = () => {
           sx={{
             boxSizing: "border-box",
             justifyContent: "center",
+            alignItems: "center",
             width: "100%",
           }}
         >
@@ -64,6 +79,17 @@ const Home = () => {
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
             My Passes
           </Typography>
+          <ToggleButtonGroup
+            color="primary"
+            value={alignment}
+            exclusive
+            onChange={handleChange}
+            aria-label="Platform"
+            sx={{}}
+          >
+            <ToggleButton value="Incoming Passes">Incoming Passes</ToggleButton>
+            <ToggleButton value="Outgoing Passes">Outgoing Passes</ToggleButton>
+          </ToggleButtonGroup>
           <Grid
             container
             spacing={3}
