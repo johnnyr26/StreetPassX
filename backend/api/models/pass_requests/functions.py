@@ -1,5 +1,4 @@
 from backend.api.models.pass_requests import PassRequest
-from backend.api.models.status import Status
 from backend.db import get_database
 from backend.utils.exceptions import PassRequestNotFoundException
 

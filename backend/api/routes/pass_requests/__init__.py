@@ -11,7 +11,7 @@ from backend.api.models.user.functions import get_user_by_email
 
 # error imports
 from backend.utils.exceptions import UserNotFoundException
-from backend.utils.exceptions.http import HttpBadRequest
+from backend.utils.exceptions.http import HttpBadRequest, HttpInternalServerError
 from bson import ObjectId
 
 pass_requests = Blueprint('pass_requests', __name__, url_prefix='/pass_requests')
@@ -23,66 +23,80 @@ def api_get_pass_requests():
 
 @pass_requests.route('/create_pass_request', methods=['POST'])
 def api_create_pass_request():
-    raw_pass_request = request.get_json()
-    if raw_pass_request is None:
-        raise HttpBadRequest("The request is invalid.")
-    
-    # gets user object from email
-    user = get_user_by_email(raw_pass_request['email'])
-    if user is None:
-        raise UserNotFoundException(email=raw_pass_request['email'])
-    raw_pass_request['user'] = user
+    try:
+        raw_pass_request = request.get_json()
+        if raw_pass_request is None:
+            raise HttpBadRequest("The request is invalid.")
+        
+        # gets user object from email
+        user = get_user_by_email(raw_pass_request['email'])
+        if user is None:
+            raise UserNotFoundException(email=raw_pass_request['email'])
+        raw_pass_request['user'] = user
 
-    # use the current creation date
-    raw_pass_request['creation_date'] = datetime.now()
+        # use the current creation date
+        raw_pass_request['creation_date'] = datetime.now()
 
-    pass_request = PassRequest(**raw_pass_request)
-    create_pass_request(pass_request)
+        pass_request = PassRequest(**raw_pass_request)
+        create_pass_request(pass_request)
 
-    json_pass_request = pass_request.to_json()
-    json_pass_request["_id"] = str(pass_request.get_id())
+        json_pass_request = pass_request.to_json()
+        json_pass_request["_id"] = str(pass_request.get_id())
 
-    return json_pass_request
+        return json_pass_request
+    except HttpBadRequest as ex:
+        print(ex)
+        return HttpBadRequest('The request body is invalid.')
+    except UserNotFoundException as ex:
+        print(ex)
+        return HttpInternalServerError(ex)
 
 @pass_requests.route('/accept_pass_request', methods=['POST'])
 def api_accept_pass_request():
-     # gets json request
-    raw_pass_request = request.get_json()
-    if raw_pass_request is None:
-        raise HttpBadRequest()
-    
-    # gets pass request object from id
-    pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
+    try:
+        # gets json request
+        raw_pass_request = request.get_json()
+        if raw_pass_request is None:
+            raise HttpBadRequest()
+        
+        # gets pass request object from id
+        pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
 
-    # gets accepted user object from email
-    accepted_user = get_user_by_email(email=raw_pass_request.get('email'))
-    if accepted_user is None:
-        raise UserNotFoundException(email=raw_pass_request.get('email'))
-    
-    # create a new pass object for the user who created it.
-    created_user_pass = Pass(
-        _id=ObjectId(),
-        user=pass_request.user,
-        event=pass_request.trade_for,
-        date=pass_request.trade_for_date,
-        guests=pass_request.guests,
-        creation_date=datetime.now()
-    )
-    create_pass(created_user_pass)
+        # gets accepted user object from email
+        accepted_user = get_user_by_email(email=raw_pass_request.get('email'))
+        if accepted_user is None:
+            raise UserNotFoundException(email=raw_pass_request.get('email'))
+        
+        # create a new pass object for the user who created it.
+        created_user_pass = Pass(
+            _id=ObjectId(),
+            user=pass_request.user,
+            event=pass_request.trade_for,
+            date=pass_request.trade_for_date,
+            guests=pass_request.guests,
+            creation_date=datetime.now()
+        )
+        create_pass(created_user_pass)
 
-    # create another pass object in place for whoever accepts the pass exchange
-    accepted_user_pass = Pass(
-        _id=ObjectId(),
-        user=accepted_user,
-        event=pass_request.trade_away,
-        date=pass_request.trade_away_date,
-        guests=None,
-        creation_date=datetime.now()
-    )
-    create_pass(accepted_user_pass)
+        # create another pass object in place for whoever accepts the pass exchange
+        accepted_user_pass = Pass(
+            _id=ObjectId(),
+            user=accepted_user,
+            event=pass_request.trade_away,
+            date=pass_request.trade_away_date,
+            guests=None,
+            creation_date=datetime.now()
+        )
+        create_pass(accepted_user_pass)
 
-    # mark the pass request status as completed
-    pass_request = complete_pass_request(pass_request)
+        # mark the pass request status as completed
+        pass_request = complete_pass_request(pass_request)
 
-    # return json of the new pass
-    return [created_user_pass.to_json(), accepted_user_pass.to_json()]
+        # return json of the new pass
+        return [created_user_pass.to_json(), accepted_user_pass.to_json()]
+    except HttpBadRequest as ex:
+        print(ex)
+        return HttpBadRequest('The request body is invalid.')
+    except UserNotFoundException as ex:
+        print(ex)
+        return HttpInternalServerError(ex)
