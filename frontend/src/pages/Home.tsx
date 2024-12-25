@@ -22,7 +22,7 @@ const Home = () => {
   const [alignment, setAlignment] = useState<string>("Incoming Passes");
 
   const handleChange = (
-    event: React.MouseEvent<HTMLElement>,
+    _: React.MouseEvent<HTMLElement>,
     newAlignment: string
   ) => {
     setAlignment(newAlignment);
