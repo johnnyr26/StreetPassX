@@ -17,29 +17,37 @@ import CompletePassModal from "../components/modal/CompletePassModal";
 
 const Home = () => {
   const [openModal, setOpenModal] = useState(false);
+  const [passes, setPasses] = useState<Pass[]>([]);
   const [myPasses, setMyPasses] = useState<Pass[]>([]);
   const [selectedPass, setSelectedPass] = useState<Pass>();
-  const [alignment, setAlignment] = useState<string>("Incoming Passes");
+  const [passType, setPassType] = useState<string>("Incoming Passes");
 
   const handleChange = (
     _: React.MouseEvent<HTMLElement>,
-    newAlignment: string
+    newPassType: string
   ) => {
-    setAlignment(newAlignment);
+    console.log(newPassType);
+    setPassType(newPassType);
+    filterPasses();
   };
+
+  const filterPasses = useCallback(() => {
+    const myPasses = passes.filter(
+      (pass: Pass) =>
+        pass.user.name === "Johnny Ramirez" && passType === "Incoming Passes"
+    );
+    setMyPasses(myPasses);
+  }, [passType, passes]);
 
   const getPasses = useCallback(async () => {
     try {
-      const passes = await getPendingPasses();
-      const myPasses = passes.filter(
-        (pass: Pass) => pass.user.name === "Johnny Ramirez"
-      );
-      setMyPasses(myPasses);
+      setPasses(await getPendingPasses());
+      filterPasses();
     } catch (error) {
       console.error(error);
       alert("Error detected when attempting to fetch passes. Try again.");
     }
-  }, []);
+  }, [filterPasses]);
 
   useEffect(() => {
     getPasses();
@@ -84,7 +92,7 @@ const Home = () => {
           >
             <ToggleButtonGroup
               color="primary"
-              value={alignment}
+              value={passType}
               exclusive
               onChange={handleChange}
               aria-label="Platform"
