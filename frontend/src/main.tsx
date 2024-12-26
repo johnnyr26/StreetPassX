@@ -8,6 +8,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.tsx";
 import Floor from "./pages/Floor.tsx";
+import Signup from "./pages/Signup.tsx";
 
 import { theme } from "../style/theme.ts";
 import { ThemeProvider } from "@mui/material";
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
     path: "/floor",
     element: <Floor />,
   },
+  {
+    path: "/signup",
+    element: <Signup />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
