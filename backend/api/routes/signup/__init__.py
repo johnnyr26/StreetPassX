@@ -5,7 +5,7 @@ from backend.utils.exceptions.http import HttpBadRequest
 
 signup = Blueprint('signup', __name__, url_prefix="/signup")
 
-@signup.route('/', methods=['POST'])
+@signup.route('', methods=['POST'])
 def api_sign_up():
     try:
         raw_signup = request.get_json()

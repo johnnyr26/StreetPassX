@@ -11,14 +11,14 @@ export default defineConfig({
         target: 'http://127.0.0.1:5000',
         changeOrigin: true
       },
-       '/user': {
-        target: 'http://127.0.0.1:5000',
-        changeOrigin: true
-      },
       '/pass_requests': {
         target: 'http://127.0.0.1:5000',
         changeOrigin: true
-      }
+      },
+      '/signup': {
+        target: 'http://127.0.0.1:5000',
+        changeOrigin: true
+      },
     },
   },
 })

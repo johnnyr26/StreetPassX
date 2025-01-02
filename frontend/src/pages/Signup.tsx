@@ -4,11 +4,23 @@ import { Box, TextField } from "@mui/material";
 import Button from "../elements/Button";
 import NavBar from "../components/Navbar";
 
-const Signup = () => {
-  const [, setPhoneNumber] = useState<string>();
+import { signup } from "../api/User";
 
-const handleSignUp = async () => {
-      
+const Signup = () => {
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+
+  const handleSignUp = async () => {
+    try {
+      const args = {
+        phone_number: phoneNumber,
+      };
+      await signup(args);
+      alert('Sign up was successful.');
+      location.href = '/';
+    } catch (error) {
+      console.error(error);
+      alert("Error detected when attempting to sign up. Try again.");
+    }
   };
 
   return (
@@ -43,9 +55,9 @@ const handleSignUp = async () => {
             width: "640px",
             mt: "24px",
           }}
-          onClick={handleSignUp()}
+          onClick={handleSignUp}
         >
-          Sign UP
+          Sign Up
         </Button>
       </Box>
     </Box>

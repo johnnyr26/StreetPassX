@@ -34,6 +34,15 @@ const NavBar = () => {
               My Passes
             </Typography>
           </Link>
+          <Link
+            href="/register"
+            color="inherit"
+            sx={{ textDecoration: "none", ml: "36px" }}
+          >
+            <Typography variant="h6" component="div">
+              Sign up
+            </Typography>
+          </Link>
         </Toolbar>
       </AppBar>
     </Box>
