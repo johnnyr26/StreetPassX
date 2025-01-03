@@ -1,5 +1,10 @@
 from typing import Optional
 
+class UserNotAuthenticatedException(Exception):
+    def __init__(self):
+        message = f"User has not been authenticated."
+        super().__init__(message)
+
 class UserNotFoundException(Exception):
     def __init__(
             self, 

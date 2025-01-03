@@ -1,4 +1,4 @@
-from flask import Blueprint, request
+from flask import Blueprint, request, session
 from backend.api.models.user import User
 from backend.api.models.user.functions import create_user
 from backend.utils.exceptions.http import HttpBadRequest
@@ -21,6 +21,9 @@ def api_sign_up():
 
         # create the user in the database
         create_user(user)
+
+        # add user to the session
+        session['user'] = user
 
         return user.to_json()
     except HttpBadRequest as ex:
