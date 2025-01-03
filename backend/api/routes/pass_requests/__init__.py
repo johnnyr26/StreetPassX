@@ -14,14 +14,19 @@ from backend.utils.exceptions import UserNotFoundException
 from backend.utils.exceptions.http import HttpBadRequest, HttpInternalServerError
 from bson import ObjectId
 
+# auth import
+from backend.utils.auth import auth_required
+
 pass_requests = Blueprint('pass_requests', __name__, url_prefix='/pass_requests')
 
 @pass_requests.route('/get_pass_requests', methods=['GET'])
+@auth_required
 def api_get_pass_requests():
     pass_requests = get_pass_requests()
     return jsonify(pass_requests)
 
 @pass_requests.route('/create_pass_request', methods=['POST'])
+@auth_required
 def api_create_pass_request():
     try:
         raw_pass_request = request.get_json()
@@ -52,6 +57,7 @@ def api_create_pass_request():
         return HttpInternalServerError(ex)
 
 @pass_requests.route('/accept_pass_request', methods=['POST'])
+@auth_required
 def api_accept_pass_request():
     try:
         # gets json request

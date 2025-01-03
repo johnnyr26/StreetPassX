@@ -11,19 +11,24 @@ from backend.api.models.passes.functions import get_passes, get_pass_by_id, upda
 from backend.utils.exceptions import PassNotFoundException, InvalidPassException
 from backend.utils.exceptions.http import HttpBadRequest, HttpInternalServerError
 
+from backend.utils.auth import auth_required
+
 passes = Blueprint('passes', __name__, url_prefix='/passes')
 
 @passes.route('/get_passes', methods=['GET'])
+@auth_required
 def api_get_passes():
     passes = get_passes()
     return jsonify(passes)
 
 @passes.route('/get_pending_passes', methods=['GET'])
+@auth_required
 def api_get_pending_passes():
     passes = get_pending_passes()
     return jsonify(passes)
 
 @passes.route('/complete_pass', methods=['POST'])
+@auth_required
 def api_complete_exchange():
     try:
         # gets json request
@@ -56,6 +61,7 @@ def api_complete_exchange():
         return HttpInternalServerError(ex)
     
 @passes.route('/update_guests', methods=['POST'])
+@auth_required
 def api_add_guests():
     try:
         # gets json request
@@ -85,7 +91,8 @@ def api_add_guests():
         print(ex)
         return HttpInternalServerError(ex)
 
-@passes.route('/cancel_pass', methods=['POSTS'])
+@passes.route('/cancel_pass', methods=['POST'])
+@auth_required
 def api_cancel_pass():
     try:
         # gets json request

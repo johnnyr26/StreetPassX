@@ -51,7 +51,7 @@ const Home = () => {
 
   useEffect(() => {
     getPasses();
-  }, [getPasses]);
+  }, []);
 
   return (
     <Box
