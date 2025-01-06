@@ -11,7 +11,6 @@ export type Pass = {
 };
 
 export const createPass = async (args: {
-    email: string,
     trade_for: string,
     trade_for_date?: string,
     trade_away: string,

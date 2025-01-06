@@ -14,7 +14,6 @@ export type PassRequest = {
 
 export const acceptPassRequest = async (args: {
     _id: string
-    email: string,
     trade_for: string,
     trade_for_date?: string,
     trade_away: string,
@@ -30,7 +29,6 @@ export const acceptPassRequest = async (args: {
 };
 
 export const createPassRequest = async (args: {
-    email: string,
     trade_for: string,
     trade_for_date?: string,
     trade_away: string,

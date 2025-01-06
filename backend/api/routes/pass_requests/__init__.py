@@ -1,5 +1,5 @@
 # external imports
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, session
 from datetime import datetime
 
 # model functions imports
@@ -7,7 +7,7 @@ from backend.api.models.passes import Pass
 from backend.api.models.pass_requests import PassRequest
 from backend.api.models.passes.functions import create_pass
 from backend.api.models.pass_requests.functions import create_pass_request, get_pass_requests, get_pass_request_by_id, complete_pass_request
-from backend.api.models.user.functions import get_user_by_email
+from backend.api.models.user.functions import get_user_by_phone_number
 
 # error imports
 from backend.utils.exceptions import UserNotFoundException
@@ -33,10 +33,10 @@ def api_create_pass_request():
         if raw_pass_request is None:
             raise HttpBadRequest("The request is invalid.")
         
-        # gets user object from email
-        user = get_user_by_email(raw_pass_request['email'])
+        # gets user object from phone number
+        user = get_user_by_phone_number(session['user'])
         if user is None:
-            raise UserNotFoundException(email=raw_pass_request['email'])
+            raise UserNotFoundException(phone_number=raw_pass_request['phone_number'])
         raw_pass_request['user'] = user
 
         # use the current creation date
@@ -68,10 +68,10 @@ def api_accept_pass_request():
         # gets pass request object from id
         pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
 
-        # gets accepted user object from email
-        accepted_user = get_user_by_email(email=raw_pass_request.get('email'))
+        # gets accepted user object from phone_number
+        accepted_user = get_user_by_phone_number(session['user'])
         if accepted_user is None:
-            raise UserNotFoundException(email=raw_pass_request.get('email'))
+            raise UserNotFoundException(raw_pass_request.get('phone_number'))
         
         # create a new pass object for the user who created it.
         created_user_pass = Pass(

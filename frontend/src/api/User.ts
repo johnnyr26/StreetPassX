@@ -2,7 +2,7 @@ import { post } from "../utils/http";
 
 export type User = {
     name: string;
-    email: string;
+    phone_number: string;
 };
 
 export const signup = async (args: {
@@ -11,6 +11,15 @@ export const signup = async (args: {
     const response = await post('/signup', args)
     if (!response.ok) {
         throw new Error(`An error occured while signing up:', ${response.status})`);
+    }
+    const json = await response.json();
+    return json;
+}
+
+export const logout = async () => {
+    const response = await post('/logout', {})
+    if (!response.ok) {
+        throw new Error(`An error occured while logging out:', ${response.status})`);
     }
     const json = await response.json();
     return json;

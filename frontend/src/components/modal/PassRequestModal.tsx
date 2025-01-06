@@ -45,7 +45,6 @@ const PassRequestModal = ({
   const handleCreatePassRequest = async () => {
     try {
       const args = {
-        email: "jr9845@princeton.edu",
         trade_for: tradeFor,
         trade_for_date: tradeForDate?.toISOString(),
         trade_away: tradeAway,

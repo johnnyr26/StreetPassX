@@ -31,7 +31,7 @@ const AcceptPassRequestModal = ({
 
       const args = {
         _id: passRequest._id,
-        email: "jr9845@princeton.edu",
+        phone_number: "1234567890",
         trade_for: passRequest.trade_for,
         trade_for_date: passRequest.trade_for_date,
         trade_away: passRequest.trade_away,

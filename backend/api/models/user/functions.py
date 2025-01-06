@@ -9,9 +9,9 @@ users = db.users
 def get_users():
    return list(users.find({}, {'_id': 0}))
 
-# fetches user by email
-def get_user_by_email(email: str) -> User | None:
-   raw_user = users.find_one({"email": email})
+# fetches user by phone number
+def get_user_by_phone_number(phone_number: str) -> User | None:
+   raw_user = users.find_one({"phone_number": phone_number})
    if raw_user:
       return User(**raw_user)
 

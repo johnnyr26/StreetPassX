@@ -10,7 +10,7 @@ class UserNotFoundException(Exception):
             self, 
             _id: Optional[str] = None, 
             name: Optional[str]= None, 
-            email: Optional[str] = None
+            phone_number: Optional[str] = None
         ):
         if _id:
             message = f"User with _id:{_id} could not be found."
@@ -18,8 +18,8 @@ class UserNotFoundException(Exception):
         if name:
             message = f"User with name:{name} could not be found."
             super().__init__(message)
-        if email:
-            message = f"User with email:{email} could not be found."
+        if phone_number:
+            message = f"User with phone_number:{phone_number} could not be found."
             super().__init__(message)
 
 class PassNotFoundException(Exception):

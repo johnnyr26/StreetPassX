@@ -5,7 +5,6 @@ from datetime import datetime
 # model functions imports
 from backend.api.models.status import Status
 from backend.api.models.passes.functions import get_passes, get_pass_by_id, update_pass, get_pending_passes
-# from backend.api.models.user.functions import get_user_by_email
 
 # error imports
 from backend.utils.exceptions import PassNotFoundException, InvalidPassException

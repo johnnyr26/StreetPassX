@@ -4,7 +4,7 @@ import { Box, TextField } from "@mui/material";
 import Button from "../elements/Button";
 import NavBar from "../components/Navbar";
 
-import { signup } from "../api/User";
+import { signup, logout } from "../api/User";
 
 const Signup = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>("");
@@ -22,6 +22,16 @@ const Signup = () => {
       alert("Error detected when attempting to sign up. Try again.");
     }
   };
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      alert("Log out was successful.");
+    } catch (error) {
+      console.error(error);
+      alert("Error detected when attempting to log out. Try again.");
+    }
+  }
 
   return (
     <Box
@@ -58,6 +68,15 @@ const Signup = () => {
           onClick={handleSignUp}
         >
           Sign Up
+        </Button>
+        <Button
+          sx={{
+            width: "640px",
+            mt: "24px",
+          }}
+          onClick={handleLogout}
+        >
+          Log out
         </Button>
       </Box>
     </Box>
