@@ -1,4 +1,5 @@
 import { User } from "./User";
+import { get, post } from "../utils/http";
 
 export type PassRequest = {
     _id: string;
@@ -20,13 +21,7 @@ export const acceptPassRequest = async (args: {
     trade_away_date?: string,
     guests?: string,
 }) => {
-    const response = await fetch('/pass_requests/accept_pass_request', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(args)
-    });
+    const response = await post('/pass_requests/accept_pass_request', args);
     if (!response.ok) {
         throw new Error(`An error occured while accepting a pass request: ${response.status}`);
     }
@@ -42,13 +37,7 @@ export const createPassRequest = async (args: {
     trade_away_date?: string,
     guests: string,
 }) => {
-    const response = await fetch('/pass_requests/create_pass_request', {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(args),
-    })
+    const response = await post('/pass_requests/create_pass_request', args)
     if (!response.ok) {
         throw new Error(`An error occured while creating a new pass request: ${response.status}`);
     }
@@ -57,7 +46,7 @@ export const createPassRequest = async (args: {
 };
 
 export const getPassRequests = async () => {
-    const response = await fetch('/pass_requests/get_pass_requests');
+    const response = await get('/pass_requests/get_pass_requests');
     if (!response.ok) {
         throw new Error(`An error occured while fetching pass requests:', ${response.status })`);
     }
