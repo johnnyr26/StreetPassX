@@ -34,7 +34,7 @@ const Home = () => {
   const filterPasses = useCallback(() => {
     const myPasses = passes.filter(
       (pass: Pass) =>
-        pass.user.name === "Johnny Ramirez" && passType === "Incoming Passes"
+        pass.user.name === "Test User" && passType === "Incoming Passes"
     );
     setMyPasses(myPasses);
   }, [passType, passes]);

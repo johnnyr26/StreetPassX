@@ -34,9 +34,9 @@ def api_create_pass_request():
             raise HttpBadRequest("The request is invalid.")
         
         # gets user object from phone number
-        user = get_user_by_phone_number(session['user'])
+        user = get_user_by_phone_number(session['user']['phone_number'])
         if user is None:
-            raise UserNotFoundException(phone_number=raw_pass_request['phone_number'])
+            raise UserNotFoundException(phone_number=session['user']['phone_number'])
         raw_pass_request['user'] = user
 
         # use the current creation date
@@ -69,9 +69,9 @@ def api_accept_pass_request():
         pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
 
         # gets accepted user object from phone_number
-        accepted_user = get_user_by_phone_number(session['user'])
+        accepted_user = get_user_by_phone_number(session['user']['phone_number'])
         if accepted_user is None:
-            raise UserNotFoundException(raw_pass_request.get('phone_number'))
+            raise UserNotFoundException(session['user']['phone_number'])
         
         # create a new pass object for the user who created it.
         created_user_pass = Pass(
