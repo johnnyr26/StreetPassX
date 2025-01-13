@@ -64,6 +64,7 @@ const Signup = () => {
         />
         <Button
           sx={{
+            height: "48px",
             width: "640px",
             mt: "24px",
           }}
@@ -73,6 +74,7 @@ const Signup = () => {
         </Button>
         <Button
           sx={{
+            height: "48px",
             width: "640px",
             mt: "24px",
           }}
