@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { Box, TextField } from "@mui/material";
+import { Box, TextField, Typography } from "@mui/material";
 import Button from "../elements/Button";
 import NavBar from "../components/Navbar";
 
@@ -47,10 +47,12 @@ const Signup = () => {
           flex: 1,
           display: "flex",
           flexDirection: "column",
-          justifyContent: "center",
           alignItems: "center",
         }}
       >
+        <Typography variant="h3" sx={{ textAlign: "center", margin: "30px", marginBottom: "120px" }}>
+          Log In
+        </Typography>
         <TextField
           onChange={(e) => setPhoneNumber(e.target.value)}
           label="Phone Number"
