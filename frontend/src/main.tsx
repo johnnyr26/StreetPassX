@@ -7,6 +7,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import App from "./App.tsx";
+import Auth from "./utils/Auth.tsx";
 import Floor from "./pages/Floor.tsx";
 import Signup from "./pages/Signup.tsx";
 
@@ -32,7 +33,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <LocalizationProvider dateAdapter={AdapterDayjs}>
-        <RouterProvider router={router} />
+        <Auth>
+          <RouterProvider router={router} />
+        </Auth>
       </LocalizationProvider>
     </ThemeProvider>
   </React.StrictMode>

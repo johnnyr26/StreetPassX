@@ -19,7 +19,7 @@ export const createPass = async (args: {
 }) => {
     const response = await post('/passes/create_pass', args);
     if (!response.ok) {
-        throw new Error(`An error occured while creating a new pass:', ${response.status})`);
+        throw new Error(`An error occured while creating a new pass:', ${response.status}`);
     }
     const json = await response.json();
     return json;
@@ -28,7 +28,7 @@ export const createPass = async (args: {
 export const getPendingPasses = async () => {
     const response = await get('/passes/get_pending_passes');
     if (!response.ok) {
-        throw new Error(`An error occured while creating a new pass:', ${response.status})`);
+        throw new Error(`An error occured while creating a new pass:', ${response.status}`);
     }
     const json = await response.json();
     return json;
@@ -37,7 +37,7 @@ export const getPendingPasses = async () => {
 export const completePass = async (pass: Pass) => {
     const response = await post('/passes/complete_pass', pass);
     if (!response.ok) {
-        throw new Error(`An error occured while creating a new pass:', ${response.status})`);
+        throw new Error(`An error occured while creating a new pass:', ${response.status}`);
     }
     const json = await response.json();
     return json;
