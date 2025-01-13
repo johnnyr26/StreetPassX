@@ -1,0 +1,33 @@
+import os
+from os import load_dotenv
+
+# random number for verification
+from random import randint
+
+# importing twilio 
+from twilio.rest import Client 
+
+load_dotenv()
+  
+# Twilio credentials
+ACCOUNT_SID = os.environ['TWILIO_ACCOUNT_SID']
+AUTH_TOKEN = os.environ['TWILIO_AUTH_TOKEN']
+TWILIO_PHONE_NUMBER = os.environ['TWILIO_PHONE_NUMBER']
+  
+client = Client(ACCOUNT_SID, AUTH_TOKEN) 
+
+def send_message(phone_number: str, message: str):  
+    # Sends an sms message to the user
+    message = client.messages.create( 
+        from_=TWILIO_PHONE_NUMBER,
+        body=message, 
+        to=phone_number
+    )
+
+def send_verification_message(phone_number: str):
+    # random number used for phone number verification.
+    random_number = randint(000000, 999999)
+
+    # text message for the phone 
+    message = f"Use {random_number} for verification for StreetPassX."
+    send_message(phone_number, message)
