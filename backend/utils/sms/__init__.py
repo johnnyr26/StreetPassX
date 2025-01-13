@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from random import randint
 
 # importing twilio 
-from twilio.rest import Client 
+from twilio.rest import Client # type: ignore
 
 load_dotenv()
   
@@ -19,7 +19,7 @@ client = Client(ACCOUNT_SID, AUTH_TOKEN)
 def _send_sms(phone_number: str, message: str):  
     try:
         # Sends an sms message to the user
-        message = client.messages.create( 
+        client.messages.create( 
             from_=TWILIO_PHONE_NUMBER,
             body=message, 
             to=phone_number
