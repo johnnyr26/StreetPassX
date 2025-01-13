@@ -12,4 +12,4 @@ export const post = async (url: string, args: unknown) => {
         body: JSON.stringify(args),
     });
     return response;
-}
+};

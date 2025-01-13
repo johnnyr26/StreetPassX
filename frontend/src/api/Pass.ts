@@ -32,7 +32,7 @@ export const getPendingPasses = async () => {
     }
     const json = await response.json();
     return json;
-}
+};
 
 export const completePass = async (pass: Pass) => {
     const response = await post('/passes/complete_pass', pass);
