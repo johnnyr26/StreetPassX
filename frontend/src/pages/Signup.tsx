@@ -7,11 +7,13 @@ import NavBar from "../components/Navbar";
 import { signup, logout } from "../api/User";
 
 const Signup = () => {
+  const [name, setName] = useState<string>("");
   const [phoneNumber, setPhoneNumber] = useState<string>("");
 
   const handleSignUp = async () => {
     try {
       const args = {
+        name, 
         phone_number: phoneNumber,
       };
       await signup(args);
@@ -50,9 +52,21 @@ const Signup = () => {
           alignItems: "center",
         }}
       >
-        <Typography variant="h3" sx={{ textAlign: "center", margin: "30px", marginBottom: "120px" }}>
+        <Typography
+          variant="h3"
+          sx={{ textAlign: "center", margin: "30px", marginBottom: "120px" }}
+        >
           Log In
         </Typography>
+        <TextField
+          onChange={(e) => setName(e.target.value)}
+          label="Full Name"
+          variant="standard"
+          sx={{
+            width: "640px",
+          }}
+          name="name"
+        />
         <TextField
           onChange={(e) => setPhoneNumber(e.target.value)}
           label="Phone Number"

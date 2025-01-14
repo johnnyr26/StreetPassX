@@ -17,7 +17,7 @@ const Auth = ({ children }: Props) => {
   // checks if user is authenticated,
   const auth = useCallback(async () => {
     setLoading(true);
-    const response = await post("/login", {});
+    const response = await post("/login");
     if (!response.ok && response.status === 401) {
       setAuthenticated(false);
     } else {

@@ -18,7 +18,7 @@ def api_login():
     try:
         # check if the user is in the session
         if 'user' in session:
-            return {"login": "success"}
+            return session['user']
         return {"error": "user is not authenticated"}, 401
     except Exception as ex:
         print(ex)
@@ -31,12 +31,10 @@ def api_signup():
         if raw_signup is None:
             raise HttpBadRequest("Request body not found.")
         phone_number = raw_signup['phone_number']
-
         user = get_user_by_phone_number(phone_number)
         if user is None:
             user = User(
-                name="Test User",
-                email="abc123@princeton.edu",
+                name=raw_signup['name'],
                 phone_number=phone_number
             )
 
@@ -44,7 +42,7 @@ def api_signup():
             create_user(user)
 
         # sends sms verification message to user
-        send_sms_verification_message(phone_number)
+        # send_sms_verification_message(phone_number)
 
         # add user to the session
         session['user'] = user.to_json()

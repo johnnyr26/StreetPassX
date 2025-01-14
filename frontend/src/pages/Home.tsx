@@ -8,14 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 
+// api imports
 import { Pass, getPendingPasses } from "../api/Pass";
+import { User } from "../api/User";
 
+// util imports
+import { login } from "../api/User";
+
+// component imports
 import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
-// import Sidebar from "../components/Sidebar";
 import CompletePassModal from "../components/modal/CompletePassModal";
 
+
+
 const Home = () => {
+  const [user, setUser] = useState<User | undefined>();
   const [openModal, setOpenModal] = useState(false);
   const [passes, setPasses] = useState<Pass[]>([]);
   const [myPasses, setMyPasses] = useState<Pass[]>([]);
@@ -31,23 +39,33 @@ const Home = () => {
     filterPasses();
   };
 
+  const getUser = useCallback(async () => {
+    try {
+      setUser(await login());
+    } catch (error) {
+      console.error(error);
+      alert("An error has occured. Please try again.");
+    }
+  }, []);
+
   const filterPasses = useCallback(() => {
     const myPasses = passes.filter(
       (pass: Pass) =>
-        pass.user.name === "Test User" && passType === "Incoming Passes"
+        pass.user.phone_number === user?.phone_number && passType === "Incoming Passes"
     );
     setMyPasses(myPasses);
-  }, [passType, passes]);
+  }, [passType, passes, user?.phone_number]);
 
   const getPasses = useCallback(async () => {
     try {
+      await getUser();
       setPasses(await getPendingPasses());
       filterPasses();
     } catch (error) {
       console.error(error);
       alert("Error detected when attempting to fetch passes. Try again.");
     }
-  }, [filterPasses]);
+  }, [filterPasses, getUser]);
 
   useEffect(() => {
     getPasses();
