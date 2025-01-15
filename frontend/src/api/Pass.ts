@@ -2,12 +2,12 @@ import { User } from "./User";
 import { get, post } from "../utils/http";
 
 export type Pass = {
-
-  user: User;
-  event: string;
-  date?: string;
-  guests?: string;
-  creationDate: Date;
+    added_by_user: User;
+    referred_by_user: User;
+    event: string;
+    date?: string;
+    guests?: string;
+    creationDate: Date;
 };
 
 export const createPass = async (args: {

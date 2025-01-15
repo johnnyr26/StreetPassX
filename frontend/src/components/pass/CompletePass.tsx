@@ -1,6 +1,6 @@
 import Pass from "./Pass";
 
-const EditPass = ({
+const CompletePass = ({
   name,
   descriptions,
   modalOpen,
@@ -13,10 +13,10 @@ const EditPass = ({
     <Pass
       name={`${name}`}
       descriptions={descriptions}
-      buttonTitle={"Edit Pass"}
+      buttonTitle={"Complete Pass"}
       onPress={modalOpen}
     />
   );
 };
 
-export default EditPass;
+export default CompletePass;

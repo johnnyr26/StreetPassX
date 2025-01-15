@@ -9,7 +9,10 @@ from backend.api.models.status import Status
 
 class Pass(BaseModel):
     _id: ObjectId
-    user: Optional[User]
+    # the user that is adding the guest
+    added_by_user: Optional[User]
+    # the user that is referring the guest
+    referred_by_user: Optional[User]
     event: Optional[str]
     date: Optional[datetime] = None
     guests: Optional[str] = ""

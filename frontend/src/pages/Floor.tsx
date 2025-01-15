@@ -4,7 +4,7 @@ import { Box, Grid, Typography } from "@mui/material";
 
 import { User } from "../api/User";
 
-import ClaimPass from "../components/pass/ClaimPass";
+import ClaimPassRequest from "../components/pass_request/ClaimPassRequest";
 import NavBar from "../components/Navbar";
 import PassRequestModal from "../components/modal/PassRequestModal";
 import AcceptPassRequestModal from "../components/modal/AcceptPassRequestModal";
@@ -25,7 +25,7 @@ const Floor = () => {
   const handleGetPassRequests = useCallback(async () => {
     try {
       const rawPassRequests = await getPassRequests();
-      
+
       // convert _id.$oid to just _id
       const passRequests: PassRequest[] = rawPassRequests.map(
         (passRequest: {
@@ -42,7 +42,7 @@ const Floor = () => {
         }) => {
           return {
             ...passRequest,
-            "_id":  passRequest["_id"]["$oid"] 
+            _id: passRequest["_id"]["$oid"],
           };
         }
       );
@@ -145,7 +145,7 @@ const Floor = () => {
           >
             {availablePassRequests.map((passRequest, index) => (
               <Grid item xs={1} sm={2} md={3} key={`${index}`}>
-                <ClaimPass
+                <ClaimPassRequest
                   name={passRequest.user.name}
                   descriptions={[
                     `Johnny receives: ${passRequest.trade_for}`,

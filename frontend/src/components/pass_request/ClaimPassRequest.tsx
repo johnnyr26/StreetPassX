@@ -1,6 +1,6 @@
-import Pass from "./Pass";
+import Pass from "../pass/Pass";
 
-const ClaimPass = ({
+const ClaimPassRequest = ({
   name,
   descriptions,
   myPass = false,
@@ -21,4 +21,4 @@ const ClaimPass = ({
   );
 };
 
-export default ClaimPass;
+export default ClaimPassRequest;

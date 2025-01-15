@@ -76,7 +76,8 @@ def api_accept_pass_request():
         # create a new pass object for the user who created it.
         created_user_pass = Pass(
             _id=ObjectId(),
-            user=pass_request.user,
+            added_by_user=pass_request.user,
+            referred_by_user=accepted_user,
             event=pass_request.trade_for,
             date=pass_request.trade_for_date,
             guests=pass_request.guests,
@@ -87,7 +88,8 @@ def api_accept_pass_request():
         # create another pass object in place for whoever accepts the pass exchange
         accepted_user_pass = Pass(
             _id=ObjectId(),
-            user=accepted_user,
+            added_by_user=accepted_user,
+            referred_by_user=pass_request.user,
             event=pass_request.trade_away,
             date=pass_request.trade_away_date,
             guests=None,

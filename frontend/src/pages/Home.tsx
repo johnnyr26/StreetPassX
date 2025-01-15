@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@mui/material";
 
-// api imports
+// API imports
 import { Pass, getPendingPasses } from "../api/Pass";
 import { User } from "../api/User";
 
@@ -16,17 +16,17 @@ import { User } from "../api/User";
 import { login } from "../api/User";
 
 // component imports
+import CompletePass from "../components/pass/CompletePass";
 import EditPass from "../components/pass/EditPass";
 import NavBar from "../components/Navbar";
 import CompletePassModal from "../components/modal/CompletePassModal";
-
-
 
 const Home = () => {
   const [user, setUser] = useState<User | undefined>();
   const [openModal, setOpenModal] = useState(false);
   const [passes, setPasses] = useState<Pass[]>([]);
-  const [myPasses, setMyPasses] = useState<Pass[]>([]);
+  const [incomingPasses, setIncomingPasses] = useState<Pass[]>([]);
+  const [outgoingPasses, setOutgoingPasses] = useState<Pass[]>([]);
   const [selectedPass, setSelectedPass] = useState<Pass>();
   const [passType, setPassType] = useState<string>("Incoming Passes");
 
@@ -34,7 +34,6 @@ const Home = () => {
     _: React.MouseEvent<HTMLElement>,
     newPassType: string
   ) => {
-    console.log(newPassType);
     setPassType(newPassType);
     filterPasses();
   };
@@ -49,12 +48,19 @@ const Home = () => {
   }, []);
 
   const filterPasses = useCallback(() => {
-    const myPasses = passes.filter(
-      (pass: Pass) =>
-        pass.user.phone_number === user?.phone_number && passType === "Incoming Passes"
-    );
-    setMyPasses(myPasses);
-  }, [passType, passes, user?.phone_number]);
+    const outgoingPasses: Pass[] = [];
+    const incomingPasses: Pass[] = [];
+    passes.forEach((pass: Pass) => {
+      if (pass.added_by_user.phone_number === user?.phone_number) {
+        incomingPasses.push(pass);
+      } else if (pass.referred_by_user.phone_number === user?.phone_number) {
+        outgoingPasses.push(pass);
+      }
+    });
+
+    setIncomingPasses(incomingPasses);
+    setOutgoingPasses(outgoingPasses);
+  }, [passes, user?.phone_number]);
 
   const getPasses = useCallback(async () => {
     try {
@@ -99,7 +105,7 @@ const Home = () => {
         >
           <CompletePassModal
             modalOpenStates={[openModal, setOpenModal]}
-            setPasses={setMyPasses}
+            setPasses={setIncomingPasses}
             pass={selectedPass}
           />
           <Typography variant="h3" sx={{ textAlign: "center", margin: "30px" }}>
@@ -135,22 +141,40 @@ const Home = () => {
               alignItems: "center",
             }}
           >
-            {myPasses.map((pass, index) => (
-              <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
-                <EditPass
-                  name={pass.user.name}
-                  descriptions={[
-                    `Event: ${pass.event}`,
-                    `Guest: ${pass.guests || "To be determined"}`,
-                    pass.date ? `Date: ${pass.date}` : "",
-                  ]}
-                  modalOpen={() => {
-                    setSelectedPass(pass);
-                    setOpenModal(true);
-                  }}
-                />
-              </Grid>
-            ))}
+            {passType === "Incoming Passes" &&
+              incomingPasses.map((pass, index) => (
+                <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
+                  <EditPass
+                    name={pass.referred_by_user.name}
+                    descriptions={[
+                      `Event: ${pass.event}`,
+                      `Guest: ${pass.guests || "To be determined"}`,
+                      pass.date ? `Date: ${pass.date}` : "",
+                    ]}
+                    modalOpen={() => {
+                      setSelectedPass(pass);
+                      setOpenModal(true);
+                    }}
+                  />
+                </Grid>
+              ))}
+            {passType === "Outgoing Passes" &&
+              outgoingPasses.map((pass, index) => (
+                <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
+                  <CompletePass
+                    name={pass.added_by_user.name}
+                    descriptions={[
+                      `Event: ${pass.event}`,
+                      `Guest: ${pass.guests || "To be determined"}`,
+                      pass.date ? `Date: ${pass.date}` : "",
+                    ]}
+                    modalOpen={() => {
+                      setSelectedPass(pass);
+                      setOpenModal(true);
+                    }}
+                  />
+                </Grid>
+              ))}
           </Grid>
         </Box>
       </Box>
