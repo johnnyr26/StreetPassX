@@ -4,7 +4,7 @@ import { Box, TextField, Typography } from "@mui/material";
 import Button from "../elements/Button";
 import NavBar from "../components/Navbar";
 
-import { signup, logout } from "../api/Member";
+import { signup, logout } from "../api/auth";
 
 const Signup = () => {
   const [name, setName] = useState<string>("");
