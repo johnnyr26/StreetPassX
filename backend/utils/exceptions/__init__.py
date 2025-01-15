@@ -1,11 +1,11 @@
 from typing import Optional
 
-class UserNotAuthenticatedException(Exception):
+class MemberNotAuthenticatedException(Exception):
     def __init__(self):
-        message = f"User has not been authenticated."
+        message = f"Member has not been authenticated."
         super().__init__(message)
 
-class UserNotFoundException(Exception):
+class MemberNotFoundException(Exception):
     def __init__(
             self, 
             _id: Optional[str] = None, 
@@ -13,13 +13,13 @@ class UserNotFoundException(Exception):
             phone_number: Optional[str] = None
         ):
         if _id:
-            message = f"User with _id:{_id} could not be found."
+            message = f"Member with _id:{_id} could not be found."
             super().__init__(message)
         if name:
-            message = f"User with name:{name} could not be found."
+            message = f"Member with name:{name} could not be found."
             super().__init__(message)
         if phone_number:
-            message = f"User with phone_number:{phone_number} could not be found."
+            message = f"Member with phone_number:{phone_number} could not be found."
             super().__init__(message)
 
 class PassNotFoundException(Exception):

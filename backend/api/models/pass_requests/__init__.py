@@ -4,12 +4,12 @@ from typing import Optional
 from pydantic import BaseModel
 from bson import ObjectId
 
-from backend.api.models.user import User
+from backend.api.models.member import Member
 from backend.api.models.status import Status
 
 class PassRequest(BaseModel):
     _id: ObjectId
-    user: Optional[User]
+    member: Optional[Member]
     trade_for: Optional[str]
     trade_for_date: Optional[datetime] = None
     trade_away: Optional[str]
@@ -17,7 +17,7 @@ class PassRequest(BaseModel):
     guests: Optional[str]
     pass_status: Status = Status.pending
     creation_date: Optional[datetime]
-    visible_users: Optional[list[User]] = None
+    visible_Members: Optional[list[Member]] = None
 
     def to_json(self):
         return jsonable_encoder(self, exclude_none=True)

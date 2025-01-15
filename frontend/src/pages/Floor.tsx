@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { Box, Grid, Typography } from "@mui/material";
 
-import { User } from "../api/User";
+import { Member } from "../api/Member";
 
 import ClaimPassRequest from "../components/pass_request/ClaimPassRequest";
 import NavBar from "../components/Navbar";
@@ -32,7 +32,7 @@ const Floor = () => {
           _id: {
             $oid: string;
           };
-          user: User;
+          Member: Member;
           trade_for: string;
           trade_for_date?: string;
           trade_away: string;
@@ -51,7 +51,7 @@ const Floor = () => {
       const availablePassRequests: PassRequest[] = [];
 
       passRequests.forEach((passRequest: PassRequest) => {
-        if (passRequest.user.name === "John Ramirez") {
+        if (passRequest.Member.name === "John Ramirez") {
           myPassRequests.push(passRequest);
         } else {
           availablePassRequests.push(passRequest);
@@ -146,10 +146,10 @@ const Floor = () => {
             {availablePassRequests.map((passRequest, index) => (
               <Grid item xs={1} sm={2} md={3} key={`${index}`}>
                 <ClaimPassRequest
-                  name={passRequest.user.name}
+                  name={passRequest.Member.name}
                   descriptions={[
                     `Johnny receives: ${passRequest.trade_for}`,
-                    `${passRequest.user.name} receives: ${passRequest.trade_away}`,
+                    `${passRequest.Member.name} receives: ${passRequest.trade_away}`,
                     `Guests: ${passRequest.guests || "To be determined"}`,
                   ]}
                   modalOpen={() => {

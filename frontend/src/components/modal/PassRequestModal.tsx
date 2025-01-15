@@ -23,7 +23,7 @@ const PassRequestModal = ({
     open: boolean,
     setModalOpen: React.Dispatch<React.SetStateAction<boolean>>
   ];
-  setPassRequests: React.Dispatch<React.SetStateAction<PassRequest[]>>
+  setPassRequests: React.Dispatch<React.SetStateAction<PassRequest[]>>;
 }) => {
   const [tradeFor, setTradeFor] = useState<string>("");
   const [tradeForChecked, setTradeForChecked] = useState<boolean>(false);
@@ -104,7 +104,7 @@ const PassRequestModal = ({
             }}
             label="Date of event?"
           />
-          <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
+          <Tooltip title="Setting a date will assist in notifying Members about when to add members to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeForChecked && (
@@ -138,7 +138,7 @@ const PassRequestModal = ({
             }}
             label="Date of event?"
           />
-          <Tooltip title="Setting a date will assist in notifying users about when to add members to the list.">
+          <Tooltip title="Setting a date will assist in notifying Members about when to add members to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeAwayChecked && (

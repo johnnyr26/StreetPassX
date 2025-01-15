@@ -1,7 +1,7 @@
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel, Field
 
-class User(BaseModel):
+class Member(BaseModel):
     name: object = Field()
     phone_number: object = Field()
 

@@ -1,9 +1,9 @@
-import { User } from "./User";
+import { Member } from "./Member";
 import { get, post } from "../utils/http";
 
 export type PassRequest = {
     _id: string;
-    user: User;
+    member: Member;
     trade_for: string;
     trade_for_date?: string;
     trade_away: string;

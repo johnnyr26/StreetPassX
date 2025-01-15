@@ -1,9 +1,9 @@
-import { User } from "./User";
+import { Member } from "./Member";
 import { get, post } from "../utils/http";
 
 export type Pass = {
-    added_by_user: User;
-    referred_by_user: User;
+    added_by_member: Member;
+    referred_by_member: Member;
     event: string;
     date?: string;
     guests?: string;

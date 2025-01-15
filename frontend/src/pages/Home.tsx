@@ -10,10 +10,10 @@ import {
 
 // API imports
 import { Pass, getPendingPasses } from "../api/Pass";
-import { User } from "../api/User";
+import { Member } from "../api/Member";
 
 // util imports
-import { login } from "../api/User";
+import { login } from "../api/auth";
 
 // component imports
 import CompletePass from "../components/pass/CompletePass";
@@ -22,7 +22,7 @@ import NavBar from "../components/Navbar";
 import CompletePassModal from "../components/modal/CompletePassModal";
 
 const Home = () => {
-  const [user, setUser] = useState<User | undefined>();
+  const [member, setMember] = useState<Member | undefined>();
   const [openModal, setOpenModal] = useState(false);
   const [passes, setPasses] = useState<Pass[]>([]);
   const [incomingPasses, setIncomingPasses] = useState<Pass[]>([]);
@@ -38,9 +38,9 @@ const Home = () => {
     filterPasses();
   };
 
-  const getUser = useCallback(async () => {
+  const getMember = useCallback(async () => {
     try {
-      setUser(await login());
+      setMember(await login());
     } catch (error) {
       console.error(error);
       alert("An error has occured. Please try again.");
@@ -51,27 +51,29 @@ const Home = () => {
     const outgoingPasses: Pass[] = [];
     const incomingPasses: Pass[] = [];
     passes.forEach((pass: Pass) => {
-      if (pass.added_by_user.phone_number === user?.phone_number) {
+      if (pass.added_by_member.phone_number === member?.phone_number) {
         incomingPasses.push(pass);
-      } else if (pass.referred_by_user.phone_number === user?.phone_number) {
+      } else if (
+        pass.referred_by_member.phone_number === member?.phone_number
+      ) {
         outgoingPasses.push(pass);
       }
     });
 
     setIncomingPasses(incomingPasses);
     setOutgoingPasses(outgoingPasses);
-  }, [passes, user?.phone_number]);
+  }, [passes, member?.phone_number]);
 
   const getPasses = useCallback(async () => {
     try {
-      await getUser();
+      await getMember();
       setPasses(await getPendingPasses());
       filterPasses();
     } catch (error) {
       console.error(error);
       alert("Error detected when attempting to fetch passes. Try again.");
     }
-  }, [filterPasses, getUser]);
+  }, [filterPasses, getMember]);
 
   useEffect(() => {
     getPasses();
@@ -145,7 +147,7 @@ const Home = () => {
               incomingPasses.map((pass, index) => (
                 <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
                   <EditPass
-                    name={pass.referred_by_user.name}
+                    name={pass.referred_by_member.name}
                     descriptions={[
                       `Event: ${pass.event}`,
                       `Guest: ${pass.guests || "To be determined"}`,
@@ -162,7 +164,7 @@ const Home = () => {
               outgoingPasses.map((pass, index) => (
                 <Grid item xs={1} sm={2} md={3} key={`${pass},${index}`}>
                   <CompletePass
-                    name={pass.added_by_user.name}
+                    name={pass.added_by_member.name}
                     descriptions={[
                       `Event: ${pass.event}`,
                       `Guest: ${pass.guests || "To be determined"}`,

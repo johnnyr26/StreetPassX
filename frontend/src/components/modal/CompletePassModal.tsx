@@ -29,7 +29,7 @@ const CompletePassModal = ({
       await completePass(pass);
 
       alert("Pass has been completed successfully.");
-      setPasses(passes => passes.filter(currPass => currPass !== pass))
+      setPasses((passes) => passes.filter((currPass) => currPass !== pass));
       setOpen(false);
     } catch (error) {
       console.error(error);
@@ -53,7 +53,7 @@ const CompletePassModal = ({
           mb: "10px",
         }}
       >
-        Complete Exchange with {pass?.added_by_user.name}
+        Complete Exchange with {pass?.added_by_member.name}
       </Typography>
       <Typography
         variant="body1"
@@ -61,7 +61,7 @@ const CompletePassModal = ({
         sx={{ textAlign: "center", mt: "18px" }}
       >
         By fulfilling a pass exchange, you are confirming that you have added
-        {pass?.added_by_user.name}'s guest to your list.
+        {pass?.added_by_member.name}'s guest to your list.
       </Typography>
       <Typography
         variant="body1"
@@ -74,7 +74,7 @@ const CompletePassModal = ({
         sx={{ mt: "18px", fontSize: "18px" }}
         onClick={async () => await handleCompletePass()}
       >
-        I have added {pass?.added_by_user.name}'s guest to the list
+        I have added {pass?.added_by_member.name}'s guest to the list
       </Button>
     </Modal>
   );

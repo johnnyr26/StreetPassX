@@ -7,10 +7,10 @@ from backend.api.models.passes import Pass
 from backend.api.models.pass_requests import PassRequest
 from backend.api.models.passes.functions import create_pass
 from backend.api.models.pass_requests.functions import create_pass_request, get_pass_requests, get_pass_request_by_id, complete_pass_request
-from backend.api.models.user.functions import get_user_by_phone_number
+from backend.api.models.member.functions import get_member_by_phone_number
 
 # error imports
-from backend.utils.exceptions import UserNotFoundException
+from backend.utils.exceptions import MemberNotFoundException
 from backend.utils.exceptions.http import HttpBadRequest, HttpInternalServerError
 from bson import ObjectId
 
@@ -33,11 +33,11 @@ def api_create_pass_request():
         if raw_pass_request is None:
             raise HttpBadRequest("The request is invalid.")
         
-        # gets user object from phone number
-        user = get_user_by_phone_number(session['user']['phone_number'])
-        if user is None:
-            raise UserNotFoundException(phone_number=session['user']['phone_number'])
-        raw_pass_request['user'] = user
+        # gets Member object from phone number
+        member = get_member_by_phone_number(session['Member']['phone_number'])
+        if member is None:
+            raise MemberNotFoundException(phone_number=session['Member']['phone_number'])
+        raw_pass_request['Member'] = member
 
         # use the current creation date
         raw_pass_request['creation_date'] = datetime.now()
@@ -52,7 +52,7 @@ def api_create_pass_request():
     except HttpBadRequest as ex:
         print(ex)
         return HttpBadRequest('The request body is invalid.')
-    except UserNotFoundException as ex:
+    except MemberNotFoundException as ex:
         print(ex)
         return HttpInternalServerError(ex)
 
@@ -68,43 +68,43 @@ def api_accept_pass_request():
         # gets pass request object from id
         pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
 
-        # gets accepted user object from phone_number
-        accepted_user = get_user_by_phone_number(session['user']['phone_number'])
-        if accepted_user is None:
-            raise UserNotFoundException(session['user']['phone_number'])
+        # gets accepted Member object from phone_number
+        accepted_member = get_member_by_phone_number(session['Member']['phone_number'])
+        if accepted_member is None:
+            raise MemberNotFoundException(session['Member']['phone_number'])
         
-        # create a new pass object for the user who created it.
-        created_user_pass = Pass(
+        # create a new pass object for the Member who created it.
+        created_member_pass = Pass(
             _id=ObjectId(),
-            added_by_user=pass_request.user,
-            referred_by_user=accepted_user,
+            added_by_member=pass_request.member,
+            referred_by_member=accepted_member,
             event=pass_request.trade_for,
             date=pass_request.trade_for_date,
             guests=pass_request.guests,
             creation_date=datetime.now()
         )
-        create_pass(created_user_pass)
+        create_pass(created_member_pass)
 
         # create another pass object in place for whoever accepts the pass exchange
-        accepted_user_pass = Pass(
+        accepted_member_pass = Pass(
             _id=ObjectId(),
-            added_by_user=accepted_user,
-            referred_by_user=pass_request.user,
+            added_by_member=accepted_member,
+            referred_by_member=pass_request.member,
             event=pass_request.trade_away,
             date=pass_request.trade_away_date,
             guests=None,
             creation_date=datetime.now()
         )
-        create_pass(accepted_user_pass)
+        create_pass(accepted_member_pass)
 
         # mark the pass request status as completed
         pass_request = complete_pass_request(pass_request)
 
         # return json of the new pass
-        return [created_user_pass.to_json(), accepted_user_pass.to_json()]
+        return [created_member_pass.to_json(), accepted_member_pass.to_json()]
     except HttpBadRequest as ex:
         print(ex)
         return HttpBadRequest('The request body is invalid.')
-    except UserNotFoundException as ex:
+    except MemberNotFoundException as ex:
         print(ex)
         return HttpInternalServerError(ex)

@@ -43,7 +43,11 @@ const AcceptPassRequestModal = ({
       console.log(response);
 
       alert("Pass has been created successfully.");
-      setPassRequests(passRequests => passRequests.filter(currPassRequest => currPassRequest !== passRequest))
+      setPassRequests((passRequests) =>
+        passRequests.filter(
+          (currPassRequest) => currPassRequest !== passRequest
+        )
+      );
       setOpen(false);
     } catch (error) {
       console.error(error);
@@ -61,7 +65,7 @@ const AcceptPassRequestModal = ({
           mb: "10px",
         }}
       >
-        Accept Pass Exchange with {passRequest?.user.name}?
+        Accept Pass Exchange with {passRequest?.member.name}?
       </Typography>
       <Typography
         variant="body1"
@@ -77,7 +81,7 @@ const AcceptPassRequestModal = ({
           handleClose();
         }}
       >
-        Accept Pass Exchange with {passRequest?.user.name}
+        Accept Pass Exchange with {passRequest?.member.name}
       </Button>
     </Modal>
   );

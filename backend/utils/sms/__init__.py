@@ -18,7 +18,7 @@ client = Client(ACCOUNT_SID, AUTH_TOKEN)
 
 def _send_sms(phone_number: str, message: str):  
     try:
-        # Sends an sms message to the user
+        # Sends an sms message to the Member
         client.messages.create( 
             from_=TWILIO_PHONE_NUMBER,
             body=message, 

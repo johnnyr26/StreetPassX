@@ -1,9 +1,5 @@
 import { post } from "../utils/http";
-
-export type User = {
-    name: string;
-    phone_number: string;
-};
+import { Member } from "./Member";
 
 export const login = async () => {
     const response = await post('/login');
@@ -14,7 +10,7 @@ export const login = async () => {
     return json;
 }
 
-export const signup = async (args: User) => {
+export const signup = async (args: Member) => {
     const response = await post('/signup', args)
     if (!response.ok) {
         throw new Error(`An error occured while signing up:', ${response.status})`);
