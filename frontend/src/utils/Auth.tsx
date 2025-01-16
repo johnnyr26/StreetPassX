@@ -30,7 +30,7 @@ const Auth = ({ children }: Props) => {
     auth();
   }, [auth]);
 
-  // if the member is not authenticated, return
+  // if the member is not authenticated, return them to the login page
   return <>{!loading && (authenticated ? children : <Register />)}</>;
 };
 
