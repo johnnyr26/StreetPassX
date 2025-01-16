@@ -104,7 +104,7 @@ const PassRequestModal = ({
             }}
             label="Date of event?"
           />
-          <Tooltip title="Setting a date will assist in notifying Members about when to add members to the list.">
+          <Tooltip title="Setting a date will help in notifying members about when to add guests to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeForChecked && (
@@ -138,7 +138,7 @@ const PassRequestModal = ({
             }}
             label="Date of event?"
           />
-          <Tooltip title="Setting a date will assist in notifying Members about when to add members to the list.">
+          <Tooltip title="Setting a date will help in notifying members about when to add guests to the list.">
             <HelpIcon color="primary" sx={{ mr: "10px" }} />
           </Tooltip>
           {tradeAwayChecked && (

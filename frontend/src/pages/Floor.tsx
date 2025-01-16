@@ -51,7 +51,7 @@ const Floor = () => {
       const availablePassRequests: PassRequest[] = [];
 
       passRequests.forEach((passRequest: PassRequest) => {
-        if (passRequest.Member.name === "John Ramirez") {
+        if (passRequest.member.name === "John Ramirez") {
           myPassRequests.push(passRequest);
         } else {
           availablePassRequests.push(passRequest);
@@ -146,10 +146,10 @@ const Floor = () => {
             {availablePassRequests.map((passRequest, index) => (
               <Grid item xs={1} sm={2} md={3} key={`${index}`}>
                 <ClaimPassRequest
-                  name={passRequest.Member.name}
+                  name={passRequest.member.name}
                   descriptions={[
                     `Johnny receives: ${passRequest.trade_for}`,
-                    `${passRequest.Member.name} receives: ${passRequest.trade_away}`,
+                    `${passRequest.member.name} receives: ${passRequest.trade_away}`,
                     `Guests: ${passRequest.guests || "To be determined"}`,
                   ]}
                   modalOpen={() => {

@@ -2,14 +2,14 @@ from flask import Blueprint, jsonify, request
 from ...models.member.functions import get_members, create_member
 from ...models.member import Member
 
-members = Blueprint('member', __name__, url_prefix='/Member')
+members = Blueprint('member', __name__, url_prefix='/member')
 
 @members.route('/', methods=['GET'])
-def api_get_Members():
+def api_get_members():
     passes = get_members()
     return jsonify(passes)
 
-@members.route('/create_Member', methods=['POST'])
+@members.route('/create_member', methods=['POST'])
 def api_create_member():
     raw_member = request.get_json()
     new_member = Member(**raw_member)

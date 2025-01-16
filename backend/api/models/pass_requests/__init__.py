@@ -17,7 +17,7 @@ class PassRequest(BaseModel):
     guests: Optional[str]
     pass_status: Status = Status.pending
     creation_date: Optional[datetime]
-    visible_Members: Optional[list[Member]] = None
+    visible_members: Optional[list[Member]] = None
 
     def to_json(self):
         return jsonable_encoder(self, exclude_none=True)

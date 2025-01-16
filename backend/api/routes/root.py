@@ -16,7 +16,7 @@ def health_check():
 @root.route('/login', methods=['POST'])
 def api_login():
     try:
-        # check if the Member is in the session
+        # check if the member is in the session
         if 'member' in session:
             return session['member']
         return {"error": "Member is not authenticated"}, 401
@@ -38,13 +38,13 @@ def api_signup():
                 phone_number=phone_number
             )
 
-            # create the Member in the database
+            # create the member in the database
             create_member(member)
 
-        # sends sms verification message to Member
+        # sends sms verification message to member
         # send_sms_verification_message(phone_number)
 
-        # add Member to the session
+        # add member to the session
         session['member'] = member.to_json()
 
         return member.to_json()

@@ -10,7 +10,7 @@ def create_app():
     app.secret_key = os.environ['SECRET_KEY']
     register_routes(app)
 
-    # Error handler for when Members are not authenticated
+    # Error handler for when members are not authenticated
     def handle_unauthorized_error(e: MemberNotAuthenticatedException):
         response = jsonify({"error": str(e)})
         response.status_code = 401

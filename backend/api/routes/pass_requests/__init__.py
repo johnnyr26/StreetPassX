@@ -33,7 +33,7 @@ def api_create_pass_request():
         if raw_pass_request is None:
             raise HttpBadRequest("The request is invalid.")
         
-        # gets Member object from phone number
+        # gets member object from phone number
         member = get_member_by_phone_number(session['member']['phone_number'])
         if member is None:
             raise MemberNotFoundException(phone_number=session['member']['phone_number'])
@@ -68,12 +68,12 @@ def api_accept_pass_request():
         # gets pass request object from id
         pass_request = get_pass_request_by_id(_id=raw_pass_request.get('_id'))
 
-        # gets accepted Member object from phone_number
+        # gets accepted member object from phone_number
         accepted_member = get_member_by_phone_number(session['member']['phone_number'])
         if accepted_member is None:
             raise MemberNotFoundException(session['member']['phone_number'])
         
-        # create a new pass object for the Member who created it.
+        # create a new pass object for the member who created it.
         created_member_pass = Pass(
             _id=ObjectId(),
             added_by_member=pass_request.member,
