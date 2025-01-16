@@ -2,7 +2,7 @@ from flask import Blueprint, jsonify, request
 from ...models.member.functions import get_members, create_member
 from ...models.member import Member
 
-members = Blueprint('Member', __name__, url_prefix='/Member')
+members = Blueprint('member', __name__, url_prefix='/Member')
 
 @members.route('/', methods=['GET'])
 def api_get_Members():
